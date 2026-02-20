@@ -169,7 +169,7 @@ export default function KidsPassoverCampClient() {
 
             {/* About the Camp */}
             <section>
-              <h2 className="text-3xl font-bold text-primary mb-4">About the Camp</h2>
+              <h2 className="text-3xl font-bold text-primary mb-4 mt-6">About the Camp</h2>
               <div className="prose prose-muted max-w-none">
                 <p className="text-muted-foreground leading-relaxed">
                   The Breakaway Kids Passover Pickleball Camp is a 4-day youth program running April 7-10 at The Jar PickleBall Club in Toronto. Designed for ages 8-16, all skill levels are welcome -- no experience required. With 6 dedicated courts and a maximum of 36 kids per day, campers receive personalized attention through skill-based group placement. Each day features a mix of warmup games, professional pickleball instruction, lunch, and exciting tournament-style play with prizes.
