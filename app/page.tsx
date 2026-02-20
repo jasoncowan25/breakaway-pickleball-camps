@@ -11,20 +11,6 @@ import Link from "next/link"
 export default function HomePage() {
   const featuredCamps = [
     {
-      id: "toronto-april",
-      title: "Toronto Intermediate Intensive (3.0-3.5)", // Added skill level to title
-      date: "Apr 11-12, 2026",
-      location: "The Jar PickleBall Club",
-      price: "$900 CAD",
-      image: "/toronto-coaching-instruction.png", // Updated image to show Joey coaching at net with diverse group of players
-      badges: [
-        { text: "New", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/toronto-intermediate-pickleball-camp",
-    },
-    {
       id: "kids-passover-camp",
       title: "Kids Passover Pickleball Camp",
       date: "Apr 7-10, 2026",
@@ -37,6 +23,20 @@ export default function HomePage() {
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/kids-passover-pickleball-camp-toronto",
+    },
+    {
+      id: "toronto-april",
+      title: "Toronto Intermediate Intensive (3.0-3.5)",
+      date: "Apr 11-12, 2026",
+      location: "The Jar PickleBall Club",
+      price: "$900 CAD",
+      image: "/toronto-coaching-instruction.png",
+      badges: [
+        { text: "New", variant: "accent" as const },
+        { text: "Joey Manchurek Signature", variant: "secondary" as const },
+      ],
+      coach: "Joey Manchurek",
+      link: "/pickleball-camps/toronto-intermediate-pickleball-camp",
     },
     {
       id: "saint-martin-clinic",
