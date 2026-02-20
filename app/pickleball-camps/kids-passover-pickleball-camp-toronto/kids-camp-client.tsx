@@ -49,7 +49,7 @@ export default function KidsPassoverCampClient() {
     checkoutUrl: "https://baselinerec.com/products/passover-pickleball-camp",
     coachBio:
       "Former pro hockey player (OHL Oshawa Generals Captain; later ECHL). Grew up playing tennis & table tennis; transitioned quickly to competitive pickleball. Actively competes in tournaments; coaching focus on leadership, skill development, and helping players reach potential.",
-    image: "/kids-pickleball-training.jpg",
+    image: "/kids-passover-camp-hero.webp",
     coachImage: "/coach-joey.jpg",
     venueImages: ["/jar3.png", "/jar4.png", "/jar1.png", "/jar2.png"],
   }

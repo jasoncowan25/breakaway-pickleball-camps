@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     url: "/pickleball-camps/kids-passover-pickleball-camp-toronto",
     images: [
       {
-        url: "/kids-pickleball-training.jpg",
+        url: "/kids-passover-camp-hero.webp",
         width: 1200,
         height: 630,
-        alt: "Kids playing pickleball at Breakaway Passover Camp",
+        alt: "Coach instructing kids at Breakaway Passover Pickleball Camp",
       },
     ],
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Breakaway Kids Passover Pickleball Camp",
     description:
       "4-day youth pickleball camp at The Jar PickleBall Club, April 7-10. Ages 8-16, no experience required. $118/day.",
-    images: ["/kids-pickleball-training.jpg"],
+    images: ["/kids-passover-camp-hero.webp"],
   },
 }
 
