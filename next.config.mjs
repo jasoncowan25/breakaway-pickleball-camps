@@ -34,17 +34,17 @@ const nextConfig = {
       },
       {
         source: '/camps/kids-march-break',
-        destination: '/pickleball-camps',
+        destination: '/pickleball-camps/kids-passover-pickleball-camp-toronto',
         permanent: true,
       },
       {
         source: '/pickleball-camps/kids-march-break',
-        destination: '/pickleball-camps',
+        destination: '/pickleball-camps/kids-passover-pickleball-camp-toronto',
         permanent: true,
       },
       {
         source: '/pickleball-camps/march-break-pickleball-camp-kids-toronto',
-        destination: '/pickleball-camps',
+        destination: '/pickleball-camps/kids-passover-pickleball-camp-toronto',
         permanent: true,
       },
       {
