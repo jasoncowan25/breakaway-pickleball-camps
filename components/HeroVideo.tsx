@@ -1,49 +1,24 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+// YouTube video ID extracted from https://youtu.be/FrCsK8RlN28
+const YOUTUBE_VIDEO_ID = "FrCsK8RlN28"
 
 export function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    // Ensure muted (required for autoplay)
-    video.muted = true
-
-    const playVideo = async () => {
-      try {
-        await video.play()
-      } catch (err) {
-        // Autoplay was prevented, retry after interaction
-        console.log("[v0] Video autoplay blocked, waiting for interaction")
-      }
-    }
-
-    // Try playing immediately
-    playVideo()
-
-    // Also try on canplay event in case video wasn't loaded yet
-    video.addEventListener("canplay", playVideo)
-
-    return () => {
-      video.removeEventListener("canplay", playVideo)
-    }
-  }, [])
+  // YouTube embed with autoplay, mute, loop, no controls for background video effect
+  // playlist param set to same video ID enables looping
+  const embedUrl = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&disablekb=1`
 
   return (
-    <video
-      ref={videoRef}
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="auto"
-      poster="/images/joey-video-poster.jpg"
-      className="absolute inset-0 w-full h-full object-cover object-top"
-    >
-      <source src="/images/joey-coaching-hero.mp4" type="video/mp4" />
-    </video>
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
+      {/* Scale up iframe to hide YouTube UI and create full-bleed effect */}
+      <iframe
+        src={embedUrl}
+        title="Breakaway Pickleball Camp"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[200%] h-[200%] min-w-[100vw] min-h-[100vh] pointer-events-none"
+        style={{ border: 0 }}
+      />
+    </div>
   )
 }
