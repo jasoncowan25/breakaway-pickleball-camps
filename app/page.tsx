@@ -4,6 +4,7 @@ import { ValueProps } from "@/components/ValueProps"
 import { CampCard } from "@/components/CampCard"
 import { Footer } from "@/components/Footer"
 import { HeroAvatars } from "@/components/HeroAvatars"
+import { HeroVideo } from "@/components/HeroVideo"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Quote } from "lucide-react"
 import Link from "next/link"
@@ -16,10 +17,10 @@ export default function HomePage() {
       date: "Apr 7-10, 2026",
       location: "The Jar PickleBall Club",
       price: "$118 CAD/day",
-      image: "/kids-pickleball-training.jpg",
+      image: "/kids-passover-camp-hero.webp",
       badges: [
-        { text: "Ages 8-16", variant: "accent" as const },
-        { text: "New", variant: "secondary" as const },
+        { text: "New", variant: "accent" as const },
+        { text: "Ages 8-16", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/kids-passover-pickleball-camp-toronto",
@@ -57,9 +58,7 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center justify-center bg-[#1e3a8a]">
-        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover object-top">
-          <source src="/images/joey-coaching-hero.mp4" type="video/mp4" />
-        </video>
+        <HeroVideo />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40" />
 
         {/* Hero Content */}
