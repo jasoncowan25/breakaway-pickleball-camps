@@ -63,19 +63,38 @@ export async function POST(request: NextRequest) {
       const emailHtml = buildConfirmationEmail(camp, customerName ?? undefined)
 
       // 3. Send confirmation email
-      const { error: emailError } = await resend.emails.send({
+      // TODO: Remove TEST_MODE flag after verifying webhook works
+      const TEST_MODE = true
+
+      if (!TEST_MODE) {
+        // Send confirmation to customer
+        const { error: emailError } = await resend.emails.send({
+          from: "Breakaway Pickleball Camps <bookings@breakawaycamps.ca>",
+          replyTo: "breakawaypickleball@gmail.com",
+          to: customerEmail,
+          subject: `Booking Confirmed — ${camp.title}`,
+          html: emailHtml,
+        })
+
+        if (emailError) {
+          console.error(`Failed to send email to ${customerEmail}:`, emailError)
+        } else {
+          console.log(`Confirmation email sent to ${customerEmail} for ${camp.title}`)
+        }
+      } else {
+        console.log(`[TEST MODE] Skipped customer email to ${customerEmail}`)
+      }
+
+      // Send copy to owner (always sends — used to verify webhook in test mode)
+      const { error: bccError } = await resend.emails.send({
         from: "Breakaway Pickleball Camps <bookings@breakawaycamps.ca>",
-        replyTo: "breakawaypickleball@gmail.com",
-        to: customerEmail,
-        bcc: "breakawaypickleball@gmail.com",
-        subject: `Booking Confirmed — ${camp.title}`,
+        to: "breakawaypickleball@gmail.com",
+        subject: `${TEST_MODE ? "[TEST] " : "[Copy] "}Booking Confirmed — ${camp.title} (${customerEmail})`,
         html: emailHtml,
       })
 
-      if (emailError) {
-        console.error(`Failed to send email to ${customerEmail}:`, emailError)
-      } else {
-        console.log(`Confirmation email sent to ${customerEmail} for ${camp.title}`)
+      if (bccError) {
+        console.error(`Failed to send owner copy for ${customerEmail}:`, bccError)
       }
     } catch (err) {
       console.error("Error processing checkout.session.completed:", err)
