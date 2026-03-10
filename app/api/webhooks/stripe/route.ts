@@ -62,34 +62,26 @@ export async function POST(request: NextRequest) {
       const camp = getCampByProductId(productId)
       const emailHtml = buildConfirmationEmail(camp, customerName ?? undefined)
 
-      // 3. Send confirmation email
-      // TODO: Remove TEST_MODE flag after verifying webhook works
-      const TEST_MODE = true
+      // 3. Send confirmation email to customer
+      const { error: emailError } = await resend.emails.send({
+        from: "Breakaway Pickleball Camps <bookings@breakawaycamps.ca>",
+        replyTo: "breakawaypickleball@gmail.com",
+        to: customerEmail,
+        subject: `Booking Confirmed — ${camp.title}`,
+        html: emailHtml,
+      })
 
-      if (!TEST_MODE) {
-        // Send confirmation to customer
-        const { error: emailError } = await resend.emails.send({
-          from: "Breakaway Pickleball Camps <bookings@breakawaycamps.ca>",
-          replyTo: "breakawaypickleball@gmail.com",
-          to: customerEmail,
-          subject: `Booking Confirmed — ${camp.title}`,
-          html: emailHtml,
-        })
-
-        if (emailError) {
-          console.error(`Failed to send email to ${customerEmail}:`, emailError)
-        } else {
-          console.log(`Confirmation email sent to ${customerEmail} for ${camp.title}`)
-        }
+      if (emailError) {
+        console.error(`Failed to send email to ${customerEmail}:`, emailError)
       } else {
-        console.log(`[TEST MODE] Skipped customer email to ${customerEmail}`)
+        console.log(`Confirmation email sent to ${customerEmail} for ${camp.title}`)
       }
 
-      // Send copy to owner (always sends — used to verify webhook in test mode)
+      // 4. Send separate copy to owner
       const { error: bccError } = await resend.emails.send({
         from: "Breakaway Pickleball Camps <bookings@breakawaycamps.ca>",
         to: "breakawaypickleball@gmail.com",
-        subject: `${TEST_MODE ? "[TEST] " : "[Copy] "}Booking Confirmed — ${camp.title} (${customerEmail})`,
+        subject: `[Copy] Booking Confirmed — ${camp.title} (${customerEmail})`,
         html: emailHtml,
       })
 
