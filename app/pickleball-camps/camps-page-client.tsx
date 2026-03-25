@@ -32,7 +32,7 @@ function CampsPageContent() {
       price: "$900 CAD",
       image: "/toronto-coaching-instruction.png",
       badges: [
-        { text: "New", variant: "accent" as const },
+        { text: "Sold Out", variant: "destructive" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
@@ -48,24 +48,11 @@ function CampsPageContent() {
       price: "$118 CAD/day",
       image: "/kids-passover-camp-hero.webp",
       badges: [
-        { text: "New", variant: "accent" as const },
+        { text: "Sold Out", variant: "destructive" as const },
         { text: "Ages 8-16", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/kids-passover-pickleball-camp-toronto",
-    },
-    {
-      id: "saint-martin-clinic",
-      title: "Saint Martin Pop-Up Clinic",
-      date: "Mar 20, 2026",
-      location: "Saint Martin",
-      locationFilter: "Saint Martin",
-      format: "Clinic",
-      price: "$150 USD",
-      image: "/desert-pickleball-facility-arizona.jpg",
-      badges: [{ text: "Joey Manchurek Signature", variant: "secondary" as const }],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/saint-martin-pickleball-clinic",
     },
   ]
 
@@ -128,7 +115,7 @@ function CampsPageContent() {
           <AccordionTrigger className="text-sm font-semibold">Locations</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-3">
-              {["Toronto", "Saint Martin"].map((location) => (
+              {["Toronto"].map((location) => (
                 <div key={location} className="flex items-center space-x-2">
                   <Checkbox
                     id={`location-${location}`}
