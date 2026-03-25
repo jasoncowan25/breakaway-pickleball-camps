@@ -299,16 +299,14 @@ export default function KidsPassoverCampClient() {
                     </div>
                   </div>
 
-                  <div className="bg-accent/10 rounded-lg p-3">
-                    <p className="text-sm font-semibold text-accent-foreground">
-                      Limited Spots
+                  <div className="bg-destructive/10 rounded-lg p-3">
+                    <p className="text-sm font-semibold text-destructive">
+                      Sold Out
                     </p>
                   </div>
 
-                  <Button asChild className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-6">
-                    <a href={camp.checkoutUrl} target="_blank" rel="noopener noreferrer">
-                      Book Now
-                    </a>
+                  <Button disabled className="w-full bg-muted text-muted-foreground text-lg py-6 cursor-not-allowed">
+                    Sold Out
                   </Button>
 
                   <p className="text-xs text-center text-muted-foreground">
@@ -363,14 +361,12 @@ export default function KidsPassoverCampClient() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <div className="text-2xl font-bold text-primary">{camp.price}/day</div>
-            <div className="text-xs text-muted-foreground">
-              {camp.totalPrice} &middot; Limited spots
+            <div className="text-xs text-destructive font-semibold">
+              Sold Out
             </div>
           </div>
-          <Button asChild className="bg-primary hover:bg-primary/90 text-white px-8">
-            <a href={camp.checkoutUrl} target="_blank" rel="noopener noreferrer">
-              Book Now
-            </a>
+          <Button disabled className="bg-muted text-muted-foreground px-8 cursor-not-allowed">
+            Sold Out
           </Button>
         </div>
       </div>
