@@ -19,11 +19,12 @@ export default function HomePage() {
       price: "$118 CAD/day",
       image: "/kids-passover-camp-hero.webp",
       badges: [
-        { text: "Limited Spots", variant: "accent" as const },
+        { text: "Sold Out", variant: "destructive" as const },
         { text: "Ages 8-16", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/kids-passover-pickleball-camp-toronto",
+      soldOut: true,
     },
     {
       id: "toronto-april",
@@ -33,22 +34,12 @@ export default function HomePage() {
       price: "$900 CAD",
       image: "/toronto-coaching-instruction.png",
       badges: [
-        { text: "Over 50% Full", variant: "accent" as const },
+        { text: "Sold Out", variant: "destructive" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/toronto-intermediate-pickleball-camp",
-    },
-    {
-      id: "saint-martin-clinic",
-      title: "Saint Martin Pop-Up Clinic",
-      date: "Mar 20, 2026",
-      location: "Saint Martin",
-      price: "$150 USD",
-      image: "/desert-pickleball-facility-arizona.jpg",
-      badges: [{ text: "Joey Manchurek Signature", variant: "secondary" as const }],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/saint-martin-pickleball-clinic",
+      soldOut: true,
     },
   ]
 
