@@ -19,7 +19,7 @@ export default function HomePage() {
       price: "$118 CAD/day",
       image: "/kids-passover-camp-hero.webp",
       badges: [
-        { text: "New", variant: "accent" as const },
+        { text: "Limited Spots", variant: "accent" as const },
         { text: "Ages 8-16", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
@@ -33,7 +33,7 @@ export default function HomePage() {
       price: "$900 CAD",
       image: "/toronto-coaching-instruction.png",
       badges: [
-        { text: "New", variant: "accent" as const },
+        { text: "Over 50% Full", variant: "accent" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
