@@ -32,7 +32,7 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/toronto-beginner-intensive-may-2026.jpg",
       badges: [
-        { text: "New", variant: "accent" as const },
+        { text: "Just Announced", variant: "accent" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
