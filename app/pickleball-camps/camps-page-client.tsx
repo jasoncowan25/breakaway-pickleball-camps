@@ -30,7 +30,7 @@ function CampsPageContent() {
       format: "Camp",
       skillLevel: "2.5-2.75",
       price: "$800 CAD",
-      image: "/toronto-beginner-intensive-may-2026.png",
+      image: "/toronto-beginner-intensive-may-2026.jpg",
       badges: [
         { text: "New", variant: "accent" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
