@@ -169,7 +169,7 @@ function CampsPageContent() {
           <AccordionTrigger className="text-sm font-semibold">Skill Level</AccordionTrigger>
           <AccordionContent>
             <div className="flex flex-wrap gap-2">
-              {["3.0", "3.5", "4.0+"].map((level) => (
+              {["2.5", "3.0", "3.5", "4.0+"].map((level) => (
                 <Button
                   key={level}
                   variant={selectedSkillLevels.includes(level) ? "default" : "outline"}
