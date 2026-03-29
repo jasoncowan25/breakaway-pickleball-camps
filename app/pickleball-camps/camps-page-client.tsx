@@ -76,6 +76,20 @@ function CampsPageContent() {
 
   const completedCamps = [
     {
+      id: "saint-martin-clinic",
+      title: "Saint Martin Pop-Up Clinic",
+      date: "Mar 2026",
+      location: "American Tennis Club, Saint Martin",
+      locationFilter: "Saint Martin",
+      format: "Clinic",
+      price: "Free",
+      image: "/saint-martin-clinic-action-1.jpg",
+      badges: [{ text: "Completed", variant: "secondary" as const }],
+      coach: "Joey Manchurek",
+      link: "/pickleball-camps/saint-martin-pickleball-clinic/recap",
+      buttonText: "View Recap",
+    },
+    {
       id: "toronto-intermediate-jan",
       title: "Toronto Intermediate Intensive",
       date: "Jan 10-11, 2026",
