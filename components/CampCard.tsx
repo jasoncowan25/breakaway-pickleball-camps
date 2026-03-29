@@ -16,9 +16,10 @@ interface CampCardProps {
   link?: string // Added optional link prop to override default camp URL
   buttonText?: string // Added buttonText prop to customize Reserve Spot button
   imageEnhanced?: boolean // Apply CSS filters to enhance image colors
+  compact?: boolean // Simplified card format for recaps - no price, location, coach
 }
 
-export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced }: CampCardProps) {
+export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced, compact }: CampCardProps) {
   const campLink = link || `/pickleball-camps/${id}`
 
   return (
@@ -57,24 +58,26 @@ export function CampCard({ id, title, date, location, price, image, badges, coac
         <div className="p-4">
           <h3 className="text-lg font-bold text-primary mb-2 group-hover:text-accent transition-colors">{title}</h3>
 
-          {coach && <p className="text-sm text-muted-foreground mb-2">with {coach}</p>}
+          {!compact && coach && <p className="text-sm text-muted-foreground mb-2">with {coach}</p>}
 
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
             <Calendar className="h-4 w-4" />
             <span>{date}</span>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-            <MapPin className="h-4 w-4" />
-            <span>{location}</span>
-          </div>
+          {!compact && (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+              <MapPin className="h-4 w-4" />
+              <span>{location}</span>
+            </div>
+          )}
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-4 border-t border-border">
-            <span className="text-2xl font-bold text-primary">{price}</span>
+          <div className={`flex items-center justify-between ${compact ? "pt-2" : "pt-4 border-t border-border"}`}>
+            {!compact && <span className="text-2xl font-bold text-primary">{price}</span>}
             <Button
               variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+              className={`border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent ${compact ? "w-full" : ""}`}
             >
               {buttonText || "Reserve Spot"}
             </Button>
