@@ -15,9 +15,10 @@ interface CampCardProps {
   coach?: string
   link?: string // Added optional link prop to override default camp URL
   buttonText?: string // Added buttonText prop to customize Reserve Spot button
+  imageEnhanced?: boolean // Apply CSS filters to enhance image colors
 }
 
-export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText }: CampCardProps) {
+export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced }: CampCardProps) {
   const campLink = link || `/pickleball-camps/${id}`
 
   return (
@@ -29,7 +30,7 @@ export function CampCard({ id, title, date, location, price, image, badges, coac
             src={image || "/placeholder.svg"}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className={`object-cover group-hover:scale-105 transition-transform duration-300 ${imageEnhanced ? "saturate-[1.15] contrast-[1.05] brightness-[1.02]" : ""}`}
           />
           {badges && badges.length > 0 && (
             <div className="absolute top-3 left-3 flex flex-col gap-2">

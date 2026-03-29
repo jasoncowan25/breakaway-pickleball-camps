@@ -17,13 +17,14 @@ export default function HomePage() {
       date: "May 23-24, 2026",
       location: "The Jar PickleBall Club",
       price: "$800 CAD",
-      image: "/toronto-beginner-intensive-may-2026.jpg",
+      image: "/toronto-beginner-intensive-may-2026.png",
       badges: [
         { text: "Just Announced", variant: "accent" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/toronto-beginner-pickleball-camp",
+      imageEnhanced: true,
     },
     {
       id: "kids-passover-camp",

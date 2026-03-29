@@ -45,7 +45,7 @@ export default function TorontoBeginnerCampClient() {
     checkoutUrl: "https://book.stripe.com/7sY7sLcvW46zgX44lYf3a03",
     coachBio:
       "Former pro hockey player (OHL Oshawa Generals Captain; later ECHL). Grew up playing tennis & table tennis; transitioned quickly to competitive pickleball. Actively competes in tournaments; coaching focus on leadership, skill development, and helping players reach potential.",
-    image: "/toronto-beginner-intensive-may-2026.jpg",
+    image: "/toronto-beginner-intensive-may-2026.png",
     coachImage: "/coach-joey.jpg",
     venueImages: ["/jar3.png", "/jar4.png", "/jar1.png", "/jar2.png"],
     curriculum: [
@@ -90,7 +90,7 @@ export default function TorontoBeginnerCampClient() {
       <section className="relative h-[500px] md:h-[400px] bg-gradient-to-br from-primary to-primary/80">
         <div className="absolute inset-0">
           <Image
-            src="/toronto-beginner-intensive-may-2026.jpg"
+            src="/toronto-beginner-intensive-may-2026.png"
             alt="Joey Manchurek coaching beginner players at The Jar pickleball club in Toronto"
             fill
             className="object-cover opacity-30"
