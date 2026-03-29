@@ -15,7 +15,7 @@ export default function SaintMartinClinicRecapPage() {
       {/* Hero Section with Action Photo */}
       <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden bg-blue-950">
         <Image
-          src="/saint-martin-clinic-action-1.jpg"
+          src="/saint-martin-clinic-group.jpg"
           alt="Saint Martin pickleball clinic action shot"
           fill
           className="object-cover object-center"
