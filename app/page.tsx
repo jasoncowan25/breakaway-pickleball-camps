@@ -49,12 +49,11 @@ export default function HomePage() {
       price: "$900 CAD",
       image: "/toronto-coaching-instruction.png",
       badges: [
-        { text: "Sold Out", variant: "destructive" as const },
+        { text: "1 Spot Left", variant: "destructive" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/toronto-intermediate-pickleball-camp",
-      soldOut: true,
     },
   ]
 
