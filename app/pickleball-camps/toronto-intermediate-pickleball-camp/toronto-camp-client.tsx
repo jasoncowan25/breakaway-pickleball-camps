@@ -99,7 +99,7 @@ export default function TorontoIntermediateCampClient() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <div className="mx-auto max-w-7xl">
-            <Badge className="mb-4 bg-accent text-accent-foreground">New</Badge>
+            <Badge className="mb-4 bg-accent text-accent-foreground">One Spot Left</Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">{camp.title}</h1>
             <p className="text-xl text-white/90">{camp.subtitle}</p>
             <div className="flex items-center gap-4 mt-3 text-white/80">

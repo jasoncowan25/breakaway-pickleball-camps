@@ -50,7 +50,7 @@ function CampsPageContent() {
       price: "$900 CAD",
       image: "/toronto-coaching-instruction.png",
       badges: [
-        { text: "1 Spot Left", variant: "destructive" as const },
+        { text: "One Spot Left", variant: "accent" as const },
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
