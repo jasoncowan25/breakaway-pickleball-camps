@@ -17,21 +17,22 @@ interface CampCardProps {
   buttonText?: string // Added buttonText prop to customize Reserve Spot button
   imageEnhanced?: boolean // Apply CSS filters to enhance image colors
   compact?: boolean // Simplified card format for recaps - no price, location, coach
+  soldOut?: boolean // Camp is sold out - apply faded styling
 }
 
-export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced, compact }: CampCardProps) {
+export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced, compact, soldOut }: CampCardProps) {
   const campLink = link || `/pickleball-camps/${id}`
 
   return (
     <Link href={campLink} scroll={true} className="group">
-      <div className="bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow">
+      <div className={`bg-card rounded-lg overflow-hidden border border-border transition-shadow ${soldOut ? "opacity-60 hover:opacity-75" : "hover:shadow-lg"}`}>
         {/* Image with badges */}
         <div className="relative h-48 bg-muted">
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
             fill
-            className={`object-cover group-hover:scale-105 transition-transform duration-300 ${imageEnhanced ? "saturate-[1.15] contrast-[1.05] brightness-[1.02]" : ""}`}
+            className={`object-cover group-hover:scale-105 transition-transform duration-300 ${soldOut ? "grayscale-[40%]" : ""} ${imageEnhanced && !soldOut ? "saturate-[1.15] contrast-[1.05] brightness-[1.02]" : ""}`}
           />
           {badges && badges.length > 0 && (
             <div className="absolute top-3 left-3 flex flex-col gap-2">
