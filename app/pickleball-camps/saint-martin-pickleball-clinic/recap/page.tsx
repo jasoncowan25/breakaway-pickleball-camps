@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowLeft, Calendar, MapPin, Users, Trophy, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Metadata } from "next"
+import { FooterNotifySignup } from "@/components/FooterNotifySignup"
 
 export const metadata: Metadata = {
   title: "Saint Martin Clinic Recap | Breakaway Pickleball",
@@ -194,6 +195,9 @@ export default function SaintMartinClinicRecapPage() {
           </Link>
         </div>
       </div>
+
+      {/* Notify Signup */}
+      <FooterNotifySignup />
     </main>
   )
 }

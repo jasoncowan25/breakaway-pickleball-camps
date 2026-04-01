@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Calendar, MapPin, Users, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { FooterNotifySignup } from "@/components/FooterNotifySignup"
 
 export default function TorontoIntensiveRecapPage() {
   return (
@@ -217,6 +218,9 @@ export default function TorontoIntensiveRecapPage() {
           </Link>
         </div>
       </div>
+
+      {/* Notify Signup */}
+      <FooterNotifySignup />
     </main>
   )
 }
