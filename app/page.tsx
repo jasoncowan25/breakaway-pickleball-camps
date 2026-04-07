@@ -83,7 +83,7 @@ export default function HomePage() {
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 text-balance">Elevate Your Game</h1>
 
             {/* Subtitle - moved above avatars */}
-            <p className="text-lg text-white font-medium drop-shadow-md mb-4">Pickleball camps across North America</p>
+            <p className="text-lg text-white font-medium drop-shadow-md mb-4">Pickleball camps across Toronto, the GTA & Muskoka</p>
 
             <HeroAvatars />
 
