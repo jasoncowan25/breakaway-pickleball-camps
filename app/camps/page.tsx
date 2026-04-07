@@ -113,7 +113,7 @@ function CampsPageContent() {
           <AccordionTrigger className="text-sm font-semibold">Locations</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-3">
-              {["Toronto", "Saint Martin"].map((location) => (
+              {["Toronto & GTA", "Muskoka"].map((location) => (
                 <div key={location} className="flex items-center space-x-2">
                   <Checkbox
                     id={`location-${location}`}
@@ -197,7 +197,7 @@ function CampsPageContent() {
           <h1 className="text-4xl font-bold text-primary mb-2">Discover Your Camp</h1>
           <p className="text-muted-foreground">
             {dateFilter === "upcoming" ? upcomingCamps.length : completedCamps.length} camps{" "}
-            {dateFilter === "upcoming" ? "available" : "completed"} across North America
+            {dateFilter === "upcoming" ? "available" : "completed"} across Toronto, the GTA & Muskoka
           </p>
         </div>
 

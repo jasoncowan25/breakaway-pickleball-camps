@@ -27,7 +27,7 @@ function CampsPageContent() {
       date: "May 23-24, 2026",
       sortDate: new Date("2026-05-23"),
       location: "The Jar PickleBall Club",
-      locationFilter: "Toronto",
+      locationFilter: "Toronto & GTA",
       format: "Camp",
       skillLevel: "2.5-2.75",
       price: "$800 CAD",
@@ -47,7 +47,7 @@ function CampsPageContent() {
       date: "April 11-12, 2026",
       sortDate: new Date("2026-04-11"),
       location: "The Jar PickleBall Club",
-      locationFilter: "Toronto",
+      locationFilter: "Toronto & GTA",
       format: "Camp",
       skillLevel: "3.0-3.5",
       price: "$900 CAD",
@@ -66,7 +66,7 @@ function CampsPageContent() {
       date: "April 7-10, 2026",
       sortDate: new Date("2026-04-07"),
       location: "The Jar PickleBall Club",
-      locationFilter: "Toronto",
+      locationFilter: "Toronto & GTA",
       format: "Camp",
       price: "$118 CAD/day",
       image: "/kids-passover-camp-hero.webp",
@@ -107,7 +107,7 @@ function CampsPageContent() {
       title: "Toronto Intermediate Intensive",
       date: "Jan 10-11, 2026",
       location: "The Jar PickleBall Club",
-      locationFilter: "Toronto",
+      locationFilter: "Toronto & GTA",
       format: "Camp",
       price: "",
       image: "/images/screenshot-202026-01-12-20at-204.png",
@@ -161,7 +161,7 @@ function CampsPageContent() {
           <AccordionTrigger className="text-sm font-semibold">Locations</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-3">
-              {["Toronto"].map((location) => (
+              {["Toronto & GTA", "Muskoka"].map((location) => (
                 <div key={location} className="flex items-center space-x-2">
                   <Checkbox
                     id={`location-${location}`}
@@ -244,7 +244,7 @@ function CampsPageContent() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-primary mb-2">Pickleball Camps</h1>
           <p className="text-muted-foreground">
-            Discover upcoming pickleball camps and clinics across North America
+            Discover upcoming pickleball camps and clinics across Toronto, the GTA & Muskoka
           </p>
         </div>
 

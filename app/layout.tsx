@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "Breakaway Pickleball Camps — Pro-Level Training Nationwide",
+  title: "Breakaway Pickleball Camps — Pro-Level Training in Toronto, GTA & Muskoka",
   description:
-    "Premium pickleball training camps across North America. Small groups, professional coaching, results-oriented programs for intermediate to advanced players.",
+    "Premium pickleball training camps across Toronto, the GTA and Muskoka. Small groups, professional coaching, results-oriented programs for intermediate to advanced players.",
   generator: "v0.app",
   icons: {
     icon: "/favicon.ico",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     apple: "/favicon.ico",
   },
   openGraph: {
-    title: "Breakaway Pickleball Camps — Pro-Level Training Nationwide",
+    title: "Breakaway Pickleball Camps — Pro-Level Training in Toronto, GTA & Muskoka",
     description:
-      "Premium pickleball training camps across North America. Small groups, professional coaching, results-oriented programs for intermediate to advanced players.",
+      "Premium pickleball training camps across Toronto, the GTA and Muskoka. Small groups, professional coaching, results-oriented programs for intermediate to advanced players.",
     url: "/pickleball-camps",
     images: [
       {

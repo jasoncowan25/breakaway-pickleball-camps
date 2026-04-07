@@ -28,11 +28,8 @@ export function CampFinder() {
               <SelectValue placeholder="Select location" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="toronto">Toronto</SelectItem>
-              <SelectItem value="saint-martin">Saint Martin</SelectItem>
-              <div className="px-2 py-1.5 text-sm text-muted-foreground italic border-t mt-1 pt-2">
-                More locations coming soon
-              </div>
+              <SelectItem value="toronto-gta">Toronto & GTA</SelectItem>
+              <SelectItem value="muskoka">Muskoka</SelectItem>
             </SelectContent>
           </Select>
         </div>
