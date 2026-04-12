@@ -101,9 +101,9 @@ export default function HomePage() {
                   alt="Kids Passover Pickleball Camp group photo"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-3 right-3 flex gap-2">
-                  <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-                    Ages 8-16
+                <div className="absolute top-3 right-3">
+                  <span className="inline-flex items-center rounded-full bg-destructive px-3 py-1 text-xs font-semibold text-destructive-foreground">
+                    Sold Out
                   </span>
                 </div>
               </div>
