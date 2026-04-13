@@ -79,18 +79,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
-    {
-      url: `${baseUrl}/waiver-sign`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    // Thank you page
-    {
-      url: `${baseUrl}/thank-you`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.3,
-    },
+    
   ]
 }
