@@ -92,7 +92,34 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-primary mb-6">Recently Completed Camps</h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl">
+            {/* Toronto Intermediate Intensive - April */}
+            <div className="group relative overflow-hidden rounded-lg bg-card border shadow-sm hover:shadow-md transition-shadow">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src="/images/toronto-intermediate-april-group.jpg"
+                  alt="Toronto Intermediate Intensive April 2026 group photo"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-3 right-3">
+                  <span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                    Completed
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-primary mb-1">Toronto Intermediate Intensive</h3>
+                <p className="text-sm text-muted-foreground mb-4">April 11-12, 2026</p>
+
+                <Button asChild variant="outline" className="w-full bg-transparent">
+                  <Link href="/pickleball-camps/toronto-intermediate-pickleball-camp/recap" scroll={true}>
+                    View Recap
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
             {/* Kids Passover Camp */}
             <div className="group relative overflow-hidden rounded-lg bg-card border shadow-sm hover:shadow-md transition-shadow">
               <div className="relative h-48 overflow-hidden">
@@ -114,33 +141,6 @@ export default function HomePage() {
 
                 <Button asChild variant="outline" className="w-full bg-transparent">
                   <Link href="/pickleball-camps/kids-passover-pickleball-camp-toronto/recap" scroll={true}>
-                    View Recap
-                  </Link>
-                </Button>
-              </div>
-            </div>
-
-            {/* Toronto Intermediate Intensive */}
-            <div className="group relative overflow-hidden rounded-lg bg-card border shadow-sm hover:shadow-md transition-shadow">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="/images/jan2026camp.jpeg"
-                  alt="Toronto Intermediate Intensive group photo"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-3 right-3">
-                  <span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-                    Completed
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-primary mb-1">Toronto Intermediate Intensive</h3>
-                <p className="text-sm text-muted-foreground mb-4">Jan 10-11, 2026</p>
-
-                <Button asChild variant="outline" className="w-full bg-transparent">
-                  <Link href="/pickleball-camps/toronto-intensive-jan/recap" scroll={true}>
                     View Recap
                   </Link>
                 </Button>

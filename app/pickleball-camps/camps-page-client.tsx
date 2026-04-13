@@ -41,26 +41,6 @@ function CampsPageContent() {
       imageEnhanced: true,
       soldOut: false,
     },
-    // Toronto Intermediate Intensive - Hidden until recap is created
-    // {
-    //   id: "toronto-april",
-    //   title: "Toronto Intermediate Intensive (3.0-3.5)",
-    //   date: "April 11-12, 2026",
-    //   sortDate: new Date("2026-04-11"),
-    //   location: "The Jar PickleBall Club",
-    //   locationFilter: "Toronto & GTA",
-    //   format: "Camp",
-    //   skillLevel: "3.0-3.5",
-    //   price: "$900 CAD",
-    //   image: "/toronto-coaching-instruction.png",
-    //   badges: [
-    //     { text: "One Spot Left", variant: "accent" as const },
-    //     { text: "Joey Manchurek Signature", variant: "secondary" as const },
-    //   ],
-    //   coach: "Joey Manchurek",
-    //   link: "/pickleball-camps/toronto-intermediate-pickleball-camp",
-    //   soldOut: false,
-    // },
     
   ].sort((a, b) => {
     // Sort by soldOut status first (available camps first), then by date
@@ -71,6 +51,21 @@ function CampsPageContent() {
   })
 
   const completedCamps = [
+    {
+      id: "toronto-april",
+      title: "Toronto Intermediate Intensive (3.0-3.5)",
+      date: "April 11-12, 2026",
+      location: "The Jar PickleBall Club",
+      locationFilter: "Toronto & GTA",
+      format: "Camp",
+      price: "",
+      image: "/images/toronto-intermediate-april-group.jpg",
+      badges: [{ text: "Completed", variant: "secondary" as const }],
+      coach: "Joey Manchurek",
+      link: "/pickleball-camps/toronto-intermediate-pickleball-camp/recap",
+      buttonText: "View Recap",
+      compact: true,
+    },
     {
       id: "kids-passover-camp",
       title: "Kids Passover Pickleball Camp",
