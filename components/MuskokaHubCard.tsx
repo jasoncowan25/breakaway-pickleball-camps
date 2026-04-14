@@ -45,9 +45,9 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
       <div className="flex-1 p-5 md:p-6 flex flex-col justify-between">
         <div>
           
-          <h3 className="text-xl md:text-2xl font-bold text-primary mb-2">Muskoka Summer Camps with Joey</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-primary mb-2">Muskoka Adult Pickleball Camps</h3>
           <p className="text-muted-foreground text-sm mb-4">
-            Train with a 5.0 DUPR pro in cottage country
+            with Joey Manchurek in cottage country
           </p>
 
           {/* Stat chips */}
