@@ -260,9 +260,7 @@ export function MuskokaPageClient() {
 
               {/* Bio */}
               <p className="text-sm text-muted-foreground mb-6">
-                Former pro hockey player turned 5.0 rated pickleball pro. Joey&apos;s coaching philosophy centers on
-                leadership, explosive movement, and technical precision - honed over years of elite team sport
-                competition.
+                Former pro hockey player turned pickleball pro. Joey's coaching philosophy centers on leadership, explosive movement, and technical precision - honed over years of elite team sport competition.
               </p>
 
               {/* CTAs */}
