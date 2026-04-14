@@ -23,10 +23,11 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
         {/* Left: Image */}
         <div className="relative w-[40%] min-h-[280px]">
           <img
-            src="/muskoka-photos/muskoka-court-indoor.jpg"
-            alt="Muskoka private indoor pickleball court"
+            src="/muskoka-photos/muskoka-path.jpg"
+            alt="Muskoka cottage country autumn scenery"
             className="absolute inset-0 w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-black/40" />
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">
             <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
@@ -89,10 +90,11 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
         {/* Image */}
         <div className="relative aspect-video">
           <img
-            src="/muskoka-photos/muskoka-court-indoor.jpg"
-            alt="Muskoka private indoor pickleball court"
+            src="/muskoka-photos/muskoka-path.jpg"
+            alt="Muskoka cottage country autumn scenery"
             className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-black/40" />
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">
             <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
