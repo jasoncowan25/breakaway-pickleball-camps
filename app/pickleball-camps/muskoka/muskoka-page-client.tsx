@@ -359,9 +359,7 @@ export function MuskokaPageClient() {
                 A Brand New Private Court - Not Open To The Public
               </h2>
               <p className="text-muted-foreground mb-6">
-                Train on a premium indoor pickleball surface in the heart of Muskoka cottage country. Our facility
-                is exclusive to Breakaway campers - no public walk-ins, no court time pressure, no distractions.
-                Just you, Joey, and three other players working for three days.
+                Train on a premium indoor pickleball surface in the heart of Muskoka cottage country. Our facility is exclusive to Breakaway - no public walk-ins, no court time pressure, no distractions. Just you, Joey, and three other players working for three days.
               </p>
 
               {/* Feature list */}
