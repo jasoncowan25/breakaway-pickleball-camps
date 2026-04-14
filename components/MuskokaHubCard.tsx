@@ -34,12 +34,12 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
               Just Announced
             </span>
             <span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              JOEY MANCHUREK SIGNATURE
+              Joey Signature
             </span>
           </div>
           <div className="absolute bottom-3 left-3">
             <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-              NEW PRIVATE FACILITY
+              New Private Facility
             </span>
           </div>
         </div>
@@ -98,15 +98,15 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">
             <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
-              6 CAMPS - JULY 2026
+              Just Announced
             </span>
             <span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              JOEY MANCHUREK SIGNATURE
+              Joey Signature
             </span>
           </div>
           <div className="absolute bottom-3 left-3">
             <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-secondary-foreground">
-              PRIVATE FACILITY
+              New Private Facility
             </span>
           </div>
         </div>

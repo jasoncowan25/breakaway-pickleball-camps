@@ -21,8 +21,8 @@ export default function HomePage() {
       price: "$675 CAD",
       image: "/toronto-beginner-intensive-may-2026.png",
       badges: [
-        { text: "Just Announced", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
+        { text: "New", variant: "accent" as const },
+        { text: "Joey Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/toronto-core-skills-pickleball-camp",
