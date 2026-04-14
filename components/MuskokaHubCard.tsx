@@ -19,7 +19,7 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
       )}
     >
       {/* Top: Image */}
-      <div className="relative h-[200px] md:h-[220px]">
+      <div className="relative h-48">
         <img
           src="/muskoka-photos/muskoka-path.jpg"
           alt="Muskoka cottage country autumn scenery"
