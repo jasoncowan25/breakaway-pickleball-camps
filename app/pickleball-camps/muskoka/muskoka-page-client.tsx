@@ -268,7 +268,7 @@ export function MuskokaPageClient() {
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button onClick={scrollToCamps} size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                  View July Camps
+                  See The Camps
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link href="/pickleball-coaches">Meet Joey</Link>
