@@ -84,7 +84,7 @@ export default function HomePage() {
             {featuredCamps.map((camp) => (
               <CampCard key={camp.id} {...camp} />
             ))}
-            <MuskokaHubCard />
+            <MuskokaHubCard className="md:col-span-2 lg:col-span-2" />
           </div>
         </div>
       </section>
