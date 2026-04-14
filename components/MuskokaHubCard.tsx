@@ -51,17 +51,7 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
           </p>
 
           {/* Stat chips */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="inline-flex items-center rounded-md bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              6 CAMPS
-            </span>
-            <span className="inline-flex items-center rounded-md bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              4 PLAYERS MAX
-            </span>
-            <span className="inline-flex items-center rounded-md bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              3 DAYS EACH
-            </span>
-          </div>
+          
 
           {/* Date strip */}
           <p className="text-xs text-muted-foreground">
