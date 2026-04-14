@@ -34,8 +34,8 @@ export default function TorontoBeginnerCampClient() {
   }, [])
 
   const camp = {
-    title: "Toronto Core Skills Pickleball Intensive",
-    subtitle: "2-Day Foundation Training • Players (2.5-2.75)",
+    title: "Toronto Fundamentals Intensive",
+    subtitle: "2-Day Foundation Training • Players (2.5–2.75)",
     location: "Toronto",
     coach: "Joey Manchurek",
     date: "May 23-24, 2026",

@@ -41,7 +41,7 @@ export function Navigation() {
                   TORONTO & GTA
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/pickleball-camps/toronto-core-skills-pickleball-camp">Toronto Core Skills Intensive</Link>
+                  <Link href="/pickleball-camps/toronto-core-skills-pickleball-camp">Toronto Fundamentals Intensive (2.5–2.75)</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
