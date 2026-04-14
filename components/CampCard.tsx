@@ -56,7 +56,7 @@ export function CampCard({ id, title, date, location, price, image, badges, coac
 
         {/* Content */}
         <div className="p-4">
-          <h3 className="text-lg font-bold text-primary mb-2 group-hover:text-accent transition-colors">{title}</h3>
+          <h3 className="text-lg font-bold text-primary mb-2 group-hover:text-accent transition-colors whitespace-pre-line">{title}</h3>
 
           {!compact && coach && <p className="text-sm text-muted-foreground mb-2">with {coach}</p>}
 
