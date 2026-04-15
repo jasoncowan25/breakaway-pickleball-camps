@@ -1,21 +1,21 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path((?!api).*)",
       "has": [{ "type": "host", "value": "breakawaypickleball.ca" }],
-      "destination": "https://www.breakawaypickleball.ca/$1",
+      "destination": "https://www.breakawaypickleball.ca/:path",
       "permanent": true
     },
     {
-      "source": "/(.*)",
+      "source": "/:path((?!api).*)",
       "has": [{ "type": "host", "value": "breakawaycamps.ca" }],
-      "destination": "https://www.breakawaypickleball.ca/$1",
+      "destination": "https://www.breakawaypickleball.ca/:path",
       "permanent": true
     },
     {
-      "source": "/(.*)",
+      "source": "/:path((?!api).*)",
       "has": [{ "type": "host", "value": "www.breakawaycamps.ca" }],
-      "destination": "https://www.breakawaypickleball.ca/$1",
+      "destination": "https://www.breakawaypickleball.ca/:path",
       "permanent": true
     },
     {
