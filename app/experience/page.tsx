@@ -29,7 +29,7 @@ const muskokaCampUrls = [
 
 // Manual overrides for sold out camps (keep in sync with Muskoka page)
 const SOLD_OUT_OVERRIDES: Record<string, boolean> = {
-  "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s": true, // July 13-15 Afternoon
+  // Add URLs here to manually mark camps as sold out
 }
 
 // Experience page with two selectable camp experiences
