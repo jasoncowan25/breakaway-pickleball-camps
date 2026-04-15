@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Calendar, Clock, Users, Check, MapPin, ArrowRight } from "lucide-react"
 import Link from "next/link"
@@ -48,16 +49,16 @@ const muskokaCamps = [
     week: 1,
   },
   {
-    id: "muskoka-fundamentals-jul-13",
-    title: "Fundamentals Camp",
-    level: "Fundamentals (Under 3.0)",
+    id: "muskoka-intermediate-jul-13-am",
+    title: "Intermediate Camp",
+    level: "Intermediate (3.0+)",
     levelVariant: "secondary" as const,
     dates: "July 13-15, 2026",
     time: "9:00 AM - 12:00 PM",
     duration: "3 Days",
     price: "$800 CAD",
     maxPlayers: 4,
-    focus: ["Core shots", "Dinking & control", "Court movement", "Positioning basics", "Game confidence"],
+    focus: ["Drops & resets", "Drives & speed-ups", "Dinking patterns", "Positioning & transitions", "Smart attacking"],
     checkoutUrl: "https://book.stripe.com/dRmfZhanOcD5bCK8Cef3a0r",
     week: 2,
   },
@@ -107,14 +108,16 @@ const muskokaCamps = [
 
 function CampCard({ 
   camp, 
-  availability 
+  availability,
+  isLoading 
 }: { 
   camp: (typeof muskokaCamps)[0]
   availability?: { spotsRemaining: number; maxSpots: number }
+  isLoading?: boolean
 }) {
   const hasCheckout = camp.checkoutUrl && camp.checkoutUrl.length > 0
   const spotsRemaining = availability?.spotsRemaining ?? camp.maxPlayers
-  const isSoldOut = spotsRemaining === 0
+  const isSoldOut = !isLoading && spotsRemaining === 0
 
   return (
     <Card className="overflow-hidden h-full flex flex-col">
@@ -122,7 +125,9 @@ function CampCard({
         {/* Badges */}
         <div className="flex items-center justify-between mb-3">
           <Badge variant={camp.levelVariant}>{camp.level}</Badge>
-          {isSoldOut ? (
+          {isLoading ? (
+            <Skeleton className="h-5 w-20" />
+          ) : isSoldOut ? (
             <Badge variant="destructive" className="text-xs">
               Sold Out
             </Badge>
@@ -199,13 +204,22 @@ export function MuskokaPageClient() {
   const [mapModalOpen, setMapModalOpen] = useState(false)
   const [levelFilter, setLevelFilter] = useState<LevelFilter>("all")
   
-  const { data: availabilityData } = useSWR<AvailabilityData>(
+  const { data: availabilityData, isLoading: isLoadingAvailability } = useSWR<AvailabilityData>(
     "/api/camp-availability",
     fetcher,
     { refreshInterval: 30000 } // Refresh every 30 seconds
   )
   
+  // Manual overrides for sold out camps
+  const SOLD_OUT_OVERRIDES: Record<string, boolean> = {
+    "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s": true, // July 13-15 Afternoon
+  }
+
   const getAvailability = (checkoutUrl: string) => {
+    // Check for manual sold out override
+    if (SOLD_OUT_OVERRIDES[checkoutUrl]) {
+      return { spotsRemaining: 0, maxSpots: 4 }
+    }
     return availabilityData?.availability?.[checkoutUrl]
   }
   
@@ -334,7 +348,7 @@ export function MuskokaPageClient() {
                 {filterCampsByLevel(muskokaCamps)
                   .filter((c) => c.week === 1)
                   .map((camp) => (
-                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} />
+                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} isLoading={isLoadingAvailability} />
                   ))}
               </div>
             </div>
@@ -350,7 +364,7 @@ export function MuskokaPageClient() {
                 {filterCampsByLevel(muskokaCamps)
                   .filter((c) => c.week === 2)
                   .map((camp) => (
-                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} />
+                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} isLoading={isLoadingAvailability} />
                   ))}
               </div>
             </div>
@@ -366,7 +380,7 @@ export function MuskokaPageClient() {
                 {filterCampsByLevel(muskokaCamps)
                   .filter((c) => c.week === 3)
                   .map((camp) => (
-                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} />
+                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} isLoading={isLoadingAvailability} />
                   ))}
               </div>
             </div>

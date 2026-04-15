@@ -7,11 +7,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 const CAMP_CONFIG: Record<string, number> = {
   "https://book.stripe.com/28E00j2Vmbz18qy5q2f3a0p": 4, // July 10-12 - Fundamentals AM
   "https://book.stripe.com/dRm8wPeE46eHeOW05If3a0q": 4, // July 10-12 - Intermediate PM
-  "https://book.stripe.com/dRmfZhanOcD5bCK8Cef3a0r": 4, // July 13-15 - Fundamentals AM
+  "https://book.stripe.com/dRmfZhanOcD5bCK8Cef3a0r": 4, // July 13-15 - Intermediate AM
   "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s": 4, // July 13-15 - Intermediate PM
   "https://book.stripe.com/3cI5kDanOfPhgX4g4Gf3a0t": 4, // July 17-19 - Fundamentals AM
   "https://book.stripe.com/6oU3cvgMc32v6iqf0Cf3a0u": 4, // July 17-19 - Intermediate PM
 }
+
+
 
 export async function GET() {
   try {
@@ -22,37 +24,61 @@ export async function GET() {
       availability[url] = { spotsRemaining: maxSpots, maxSpots }
     }
 
-    // Fetch all completed checkout sessions
+    // Fetch all completed checkout sessions with payment_intent expanded
     const sessions = await stripe.checkout.sessions.list({
       limit: 100,
       status: "complete",
+      expand: ["data.payment_intent", "data.payment_intent.latest_charge"],
       created: {
         gte: Math.floor(Date.now() / 1000) - 180 * 24 * 60 * 60, // Last 180 days
       },
     })
 
+    // Cache payment link URLs to avoid repeated API calls
+    const paymentLinkCache: Record<string, string | null> = {}
+
     // Count bookings per payment link URL
     for (const session of sessions.data) {
-      // Check if this session came from one of our payment links
-      // The payment_link field contains the ID, but we need to match by URL
-      if (session.payment_link) {
-        // Fetch the payment link to get its URL
-        const linkId = typeof session.payment_link === "string" 
-          ? session.payment_link 
-          : session.payment_link.id
+      if (!session.payment_link) continue
+
+      // Check if the payment was refunded using expanded payment intent
+      if (session.payment_intent && typeof session.payment_intent !== "string") {
+        const paymentIntent = session.payment_intent
         
-        try {
-          const paymentLink = await stripe.paymentLinks.retrieve(linkId)
-          if (paymentLink.url && availability[paymentLink.url]) {
-            availability[paymentLink.url].spotsRemaining = Math.max(
-              0,
-              availability[paymentLink.url].spotsRemaining - 1
-            )
+        // Check latest_charge for refund status
+        const latestCharge = paymentIntent.latest_charge
+        if (latestCharge && typeof latestCharge !== "string") {
+          if (latestCharge.refunded || latestCharge.amount_refunded > 0) {
+            continue // Skip refunded payments
           }
-        } catch {
-          // Payment link may have been deleted or is inaccessible
+        }
+        
+        // Also check payment intent status
+        if (paymentIntent.status === "canceled" || paymentIntent.amount_received === 0) {
           continue
         }
+      }
+
+      // Get payment link URL (use cache to avoid repeated API calls)
+      const linkId = typeof session.payment_link === "string" 
+        ? session.payment_link 
+        : session.payment_link.id
+      
+      if (!(linkId in paymentLinkCache)) {
+        try {
+          const paymentLink = await stripe.paymentLinks.retrieve(linkId)
+          paymentLinkCache[linkId] = paymentLink.url
+        } catch {
+          paymentLinkCache[linkId] = null
+        }
+      }
+
+      const linkUrl = paymentLinkCache[linkId]
+      if (linkUrl && availability[linkUrl]) {
+        availability[linkUrl].spotsRemaining = Math.max(
+          0,
+          availability[linkUrl].spotsRemaining - 1
+        )
       }
     }
 

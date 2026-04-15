@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import Script from "next/script"
 import { ScrollToTop } from "@/components/ScrollToTop"
+import { ResizeObserverFix } from "@/components/ResizeObserverFix"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -66,6 +67,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased flex flex-col min-h-screen`}>
+        <ResizeObserverFix />
         <ScrollToTop />
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
