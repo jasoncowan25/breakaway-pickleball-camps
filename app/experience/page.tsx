@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import useSWR from "swr"
 import { Navigation } from "@/components/Navigation"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,9 +10,56 @@ import { CheckCircle, MapPin, Clock, Users, Calendar, ArrowRight } from "lucide-
 import { Footer } from "@/components/Footer"
 import Link from "next/link"
 
+const fetcher = (url: string) => fetch(url).then((res) => res.json())
+
+type AvailabilityData = {
+  availability: Record<string, { spotsRemaining: number; maxSpots: number }>
+  lastUpdated: string
+}
+
+// Muskoka camp checkout URLs to track availability
+const muskokaCampUrls = [
+  "https://book.stripe.com/28E00j2Vmbz18qy5q2f3a0p",
+  "https://book.stripe.com/dRm8wPeE46eHeOW05If3a0q",
+  "https://book.stripe.com/dRmfZhanOcD5bCK8Cef3a0r",
+  "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s",
+  "https://book.stripe.com/3cI5kDanOfPhgX4g4Gf3a0t",
+  "https://book.stripe.com/6oU3cvgMc32v6iqf0Cf3a0u",
+]
+
+// Manual overrides for sold out camps (keep in sync with Muskoka page)
+const SOLD_OUT_OVERRIDES: Record<string, boolean> = {
+  "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s": true, // July 13-15 Afternoon
+}
+
 // Experience page with two selectable camp experiences
 export default function ExperiencePage() {
   const [selectedExperience, setSelectedExperience] = useState<"toronto" | "muskoka">("toronto")
+  
+  const { data: availabilityData, isLoading: isLoadingAvailability } = useSWR<AvailabilityData>(
+    "/api/camp-availability",
+    fetcher,
+    { refreshInterval: 30000 }
+  )
+  
+  // Calculate total spots remaining across all Muskoka camps
+  const getTotalMuskokaSpots = () => {
+    if (!availabilityData?.availability) return null
+    
+    let total = 0
+    for (const url of muskokaCampUrls) {
+      if (SOLD_OUT_OVERRIDES[url]) continue // Skip sold out camps
+      const availability = availabilityData.availability[url]
+      if (availability) {
+        total += availability.spotsRemaining
+      } else {
+        total += 4 // Default max spots if not found
+      }
+    }
+    return total
+  }
+  
+  const totalMuskokaSpots = getTotalMuskokaSpots()
 
   const sharedFeatures = [
     "Small group instruction",
@@ -140,7 +188,7 @@ export default function ExperiencePage() {
               </div>
               <h3 className="text-2xl font-bold text-primary mb-2">Muskoka Adult Camp</h3>
               <p className="text-muted-foreground mb-4">
-                3-day camp on a private indoor court in Muskoka, 4 players maximum
+                3-day camp on a private indoor court in Muskoka
               </p>
               <div className="flex flex-wrap gap-3 text-sm">
                 <div className="flex items-center gap-1 text-muted-foreground">
@@ -153,7 +201,9 @@ export default function ExperiencePage() {
                 </div>
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <Users className="h-4 w-4" />
-                  <span>4 Players Max</span>
+                  <span>
+                    {isLoadingAvailability ? "..." : totalMuskokaSpots !== null ? `${totalMuskokaSpots} Spots Left` : "4 Players/Session"}
+                  </span>
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-border">
@@ -221,7 +271,9 @@ export default function ExperiencePage() {
               <span className="font-medium">Muskoka, Off Lake Joseph Rd</span>
             </div>
             <h2 className="text-3xl font-bold text-primary mb-2">Muskoka Adult Camp — Typical Day</h2>
-            <p className="text-muted-foreground mb-8">3-Day format, private indoor court, 4 players maximum, 3 hours per day of focused coaching</p>
+            <p className="text-muted-foreground mb-8">
+              3-Day format, private indoor court, {isLoadingAvailability ? "..." : totalMuskokaSpots !== null ? `${totalMuskokaSpots} spots remaining` : "4 players/session"}, 3 hours per day of focused coaching
+            </p>
             
             <div className="space-y-8">
               {Object.values(muskokaSchedule).map((day, dayIdx) => (
