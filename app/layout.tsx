@@ -55,6 +55,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script id="resize-observer-fix" strategy="beforeInteractive">
+          {`
+            // Suppress ResizeObserver loop error - this is a known browser issue
+            // that occurs when resize observations can't be delivered in a single frame
+            const ro = window.ResizeObserver;
+            window.ResizeObserver = class extends ro {
+              constructor(callback) {
+                super((entries, observer) => {
+                  requestAnimationFrame(() => {
+                    callback(entries, observer);
+                  });
+                });
+              }
+            };
+          `}
+        </Script>
         <Script src="https://www.googletagmanager.com/gtag/js?id=AW-17655187543" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
