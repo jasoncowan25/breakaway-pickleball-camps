@@ -239,12 +239,17 @@ function CampsPageContent() {
     if (selectedFormats.length > 0 && !selectedFormats.includes(camp.format)) {
       return false
     }
-    if (
-      selectedSkillLevels.length > 0 &&
-      camp.skillLevel &&
-      !selectedSkillLevels.some((level) => camp.skillLevel?.includes(level))
-    ) {
-      return false
+    if (selectedSkillLevels.length > 0 && camp.skillLevel) {
+      const matchesSkillLevel = selectedSkillLevels.some((level) => {
+        // "2.5" filter should match "Under 3.0" and "2.5-2.75"
+        if (level === "2.5") {
+          return camp.skillLevel?.includes("Under 3.0") || camp.skillLevel?.includes("2.5")
+        }
+        return camp.skillLevel?.includes(level)
+      })
+      if (!matchesSkillLevel) {
+        return false
+      }
     }
     return true
   })
