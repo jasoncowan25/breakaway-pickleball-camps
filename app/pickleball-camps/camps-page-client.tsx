@@ -15,8 +15,26 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 function CampsPageContent() {
   const searchParams = useSearchParams()
   const [showFilters, setShowFilters] = useState(false)
-  const [selectedSkillLevels, setSelectedSkillLevels] = useState<string[]>([])
-  const [selectedLocations, setSelectedLocations] = useState<string[]>([])
+  
+  // Parse URL params for initial filter state
+  const locationParam = searchParams.get("location")
+  const skillParam = searchParams.get("skill")
+  
+  // Map URL location values to filter values
+  const getInitialLocations = (): string[] => {
+    if (!locationParam) return []
+    if (locationParam === "toronto-gta") return ["Toronto & GTA"]
+    if (locationParam === "muskoka") return ["Muskoka"]
+    return []
+  }
+  
+  const getInitialSkillLevels = (): string[] => {
+    if (!skillParam) return []
+    return [skillParam]
+  }
+  
+  const [selectedSkillLevels, setSelectedSkillLevels] = useState<string[]>(getInitialSkillLevels)
+  const [selectedLocations, setSelectedLocations] = useState<string[]>(getInitialLocations)
   const [selectedFormats, setSelectedFormats] = useState<string[]>([])
   const [dateFilter, setDateFilter] = useState<"upcoming" | "completed">("upcoming")
 
