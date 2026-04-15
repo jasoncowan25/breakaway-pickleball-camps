@@ -13,7 +13,7 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/breakaway-text-logo-on-white.svg"
+              src="/breakaway-text-logo-on-white.png"
               alt="Breakaway Pickleball Camps"
               width={200}
               height={48}
