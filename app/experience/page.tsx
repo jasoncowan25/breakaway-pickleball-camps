@@ -136,7 +136,7 @@ export default function ExperiencePage() {
             >
               <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                 <MapPin className="h-4 w-4" />
-                <span>Muskoka, Off Lake Joseph Rd</span>
+                <span>Muskoka</span>
               </div>
               <h3 className="text-2xl font-bold text-primary mb-2">Muskoka Adult Camp</h3>
               <p className="text-muted-foreground mb-4">
@@ -157,7 +157,7 @@ export default function ExperiencePage() {
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-border">
-                <span className="text-sm text-muted-foreground">Bring your own lunch</span>
+                <span className="text-sm text-muted-foreground">Half day, snacks included.<br></span>
               </div>
             </button>
           </div>
