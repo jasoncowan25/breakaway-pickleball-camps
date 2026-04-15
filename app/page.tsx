@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation"
 import { CampFinder } from "@/components/CampFinder"
 import { ValueProps } from "@/components/ValueProps"
 import { CampCard } from "@/components/CampCard"
+import { MuskokaHubCard } from "@/components/MuskokaHubCard"
 import { Footer } from "@/components/Footer"
 import { HeroAvatars } from "@/components/HeroAvatars"
 import { HeroVideo } from "@/components/HeroVideo"
@@ -13,15 +14,15 @@ export default function HomePage() {
   const featuredCamps = [
     {
       id: "toronto-beginner-may",
-      title: "Toronto Core Skills Intensive (2.5-2.75)",
+      title: "Toronto Fundamentals Intensive\n(2.5–2.75)",
       date: "May 23-24, 2026",
       sortDate: new Date("2026-05-23"),
       location: "The Jar PickleBall Club",
       price: "$675 CAD",
-      image: "/toronto-beginner-intensive-may-2026.png",
+      image: "/toronto-coaching-instruction.png",
       badges: [
-        { text: "Just Announced", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
+        { text: "New", variant: "accent" as const },
+        { text: "Joey Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/toronto-core-skills-pickleball-camp",
@@ -51,7 +52,7 @@ export default function HomePage() {
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 text-balance">Elevate Your Game</h1>
 
             {/* Subtitle - moved above avatars */}
-            <p className="text-lg text-white font-medium drop-shadow-md mb-4">Pickleball camps across Toronto, the GTA & Muskoka</p>
+            <p className="text-lg text-white font-medium drop-shadow-md mb-4">Pickleball camps across Toronto, the GTA &amp; now Muskoka</p>
 
             <HeroAvatars />
 
@@ -79,10 +80,11 @@ export default function HomePage() {
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCamps.map((camp) => (
               <CampCard key={camp.id} {...camp} />
             ))}
+            <MuskokaHubCard className="md:col-span-2 lg:col-span-2" />
           </div>
         </div>
       </section>

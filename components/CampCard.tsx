@@ -14,7 +14,7 @@ interface CampCardProps {
   badges?: Array<{ text: string; variant: "default" | "destructive" | "secondary" }>
   coach?: string
   link?: string // Added optional link prop to override default camp URL
-  buttonText?: string // Added buttonText prop to customize Reserve Spot button
+  buttonText?: string // Added buttonText prop to customize Book Camp button
   imageEnhanced?: boolean // Apply CSS filters to enhance image colors
   compact?: boolean // Simplified card format for recaps - no price, location, coach
 }
@@ -56,7 +56,7 @@ export function CampCard({ id, title, date, location, price, image, badges, coac
 
         {/* Content */}
         <div className="p-4">
-          <h3 className="text-lg font-bold text-primary mb-2 group-hover:text-accent transition-colors">{title}</h3>
+          <h3 className="text-lg font-bold text-primary mb-2 group-hover:text-accent transition-colors whitespace-pre-line">{title}</h3>
 
           {!compact && coach && <p className="text-sm text-muted-foreground mb-2">with {coach}</p>}
 
@@ -79,7 +79,7 @@ export function CampCard({ id, title, date, location, price, image, badges, coac
               variant="outline"
               className={`border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent ${compact ? "w-full" : ""}`}
             >
-              {buttonText || "Reserve Spot"}
+              {buttonText || "Book Camp"}
             </Button>
           </div>
         </div>

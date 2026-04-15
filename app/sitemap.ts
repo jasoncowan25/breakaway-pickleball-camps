@@ -35,6 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.85,
     },
+    // Muskoka Hub
+    {
+      url: `${baseUrl}/pickleball-camps/muskoka`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
     // Camp detail pages
     {
       url: `${baseUrl}/pickleball-camps/kids-passover-pickleball-camp-toronto`,
@@ -79,18 +86,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
-    {
-      url: `${baseUrl}/waiver-sign`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    // Thank you page
-    {
-      url: `${baseUrl}/thank-you`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.3,
-    },
+    
   ]
 }
