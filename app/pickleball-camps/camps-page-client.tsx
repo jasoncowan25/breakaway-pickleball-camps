@@ -4,6 +4,7 @@ import { useState, Suspense } from "react"
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { CampCard } from "@/components/CampCard"
+import { MuskokaHubCard } from "@/components/MuskokaHubCard"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
@@ -59,126 +60,8 @@ function CampsPageContent() {
       imageEnhanced: true,
       soldOut: false,
     },
-    // Muskoka Summer Camps
-    {
-      id: "muskoka-intermediate-jul-10",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 10-12, 2026",
-      sortDate: new Date("2026-07-10"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "4 Players Max", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      soldOut: false,
-    },
-    {
-      id: "muskoka-fundamentals-jul-10",
-      title: "Muskoka Fundamentals Camp (Under 3.0)",
-      date: "July 10-12, 2026",
-      sortDate: new Date("2026-07-10"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "Under 3.0",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "4 Players Max", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      soldOut: false,
-    },
-    {
-      id: "muskoka-intermediate-jul-13",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 13-15, 2026",
-      sortDate: new Date("2026-07-13"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "4 Players Max", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      soldOut: false,
-    },
-    {
-      id: "muskoka-fundamentals-jul-13",
-      title: "Muskoka Fundamentals Camp (Under 3.0)",
-      date: "July 13-15, 2026",
-      sortDate: new Date("2026-07-13"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "Under 3.0",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "4 Players Max", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      soldOut: false,
-    },
-    {
-      id: "muskoka-fundamentals-jul-17",
-      title: "Muskoka Fundamentals Camp (Under 3.0)",
-      date: "July 17-19, 2026",
-      sortDate: new Date("2026-07-17"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "Under 3.0",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "4 Players Max", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      soldOut: false,
-    },
-    {
-      id: "muskoka-intermediate-jul-17",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 17-19, 2026",
-      sortDate: new Date("2026-07-17"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "4 Players Max", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      soldOut: false,
-    },
   ].sort((a, b) => {
-    // Sort by soldOut status first (available camps first), then by date
-    if (a.soldOut !== b.soldOut) {
-      return a.soldOut ? 1 : -1
-    }
+    // Sort by date
     return a.sortDate.getTime() - b.sortDate.getTime()
   })
 
@@ -451,6 +334,13 @@ function CampsPageContent() {
               {filteredCamps.map((camp) => (
                 <CampCard key={camp.id} {...camp} />
               ))}
+              {/* Show Muskoka Hub Card for upcoming camps when no location filter or Muskoka is selected */}
+              {dateFilter === "upcoming" && 
+                (selectedLocations.length === 0 || selectedLocations.includes("Muskoka")) && 
+                selectedSkillLevels.length === 0 && 
+                selectedFormats.length === 0 && (
+                <MuskokaHubCard />
+              )}
             </div>
             {filteredCamps.length === 0 && (
               <div className="text-center py-12">

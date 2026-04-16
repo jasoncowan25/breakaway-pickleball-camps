@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { MapPin, Calendar } from "lucide-react"
+import { Skeleton } from "@/components/ui/skeleton"
+import { MapPin, Calendar, Users } from "lucide-react"
 import Image from "next/image"
 
 interface CampCardProps {
@@ -11,16 +12,20 @@ interface CampCardProps {
   location: string
   price: string
   image: string
-  badges?: Array<{ text: string; variant: "default" | "destructive" | "secondary" }>
+  badges?: Array<{ text: string; variant: "default" | "destructive" | "secondary" | "accent" }>
   coach?: string
   link?: string // Added optional link prop to override default camp URL
   buttonText?: string // Added buttonText prop to customize Book Camp button
   imageEnhanced?: boolean // Apply CSS filters to enhance image colors
   compact?: boolean // Simplified card format for recaps - no price, location, coach
+  spotsRemaining?: number // Number of spots remaining for availability display
+  isLoadingAvailability?: boolean // Show skeleton while loading availability
+  soldOut?: boolean // Whether the camp is sold out
 }
 
-export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced, compact }: CampCardProps) {
+export function CampCard({ id, title, date, location, price, image, badges, coach, link, buttonText, imageEnhanced, compact, spotsRemaining, isLoadingAvailability, soldOut }: CampCardProps) {
   const campLink = link || `/pickleball-camps/${id}`
+  const showAvailability = spotsRemaining !== undefined || isLoadingAvailability
 
   return (
     <Link href={campLink} scroll={true} className="group">
@@ -33,25 +38,51 @@ export function CampCard({ id, title, date, location, price, image, badges, coac
             fill
             className={`object-cover group-hover:scale-105 transition-transform duration-300 ${imageEnhanced ? "saturate-[1.15] contrast-[1.05] brightness-[1.02]" : ""}`}
           />
-          {badges && badges.length > 0 && (
-            <div className="absolute top-3 left-3 flex flex-col gap-2">
-              {badges.map((badge, idx) => (
-                <Badge
-                  key={idx}
-                  variant={badge.variant}
-                  className={
-                    badge.variant === "destructive"
-                      ? "bg-red-600 text-white"
-                      : badge.variant === "secondary"
-                        ? "bg-primary text-primary-foreground"
-                        : ""
-                  }
-                >
-                  {badge.text}
-                </Badge>
-              ))}
-            </div>
-          )}
+          <div className="absolute top-3 left-3 right-3 flex justify-between items-start">
+            {/* Left side badges */}
+            {badges && badges.length > 0 && (
+              <div className="flex flex-col gap-2">
+                {badges.filter(b => b.text !== "4 Players Max" && !b.text.includes("Spots Left") && b.text !== "Sold Out").map((badge, idx) => (
+                  <Badge
+                    key={idx}
+                    variant={badge.variant === "accent" ? "default" : badge.variant}
+                    className={
+                      badge.variant === "destructive"
+                        ? "bg-red-600 text-white"
+                        : badge.variant === "secondary"
+                          ? "bg-primary text-primary-foreground"
+                          : badge.variant === "accent"
+                            ? "bg-accent text-accent-foreground"
+                            : ""
+                    }
+                  >
+                    {badge.text}
+                  </Badge>
+                ))}
+              </div>
+            )}
+            
+            {/* Right side availability badge */}
+            {showAvailability && (
+              <div className="ml-auto">
+                {isLoadingAvailability ? (
+                  <Skeleton className="h-5 w-20" />
+                ) : soldOut ? (
+                  <Badge variant="destructive" className="text-xs bg-red-600 text-white">
+                    Sold Out
+                  </Badge>
+                ) : spotsRemaining !== undefined ? (
+                  <Badge 
+                    variant="outline" 
+                    className={`text-xs bg-white/90 ${spotsRemaining <= 2 ? "border-orange-500 text-orange-600" : "border-border text-foreground"}`}
+                  >
+                    <Users className="h-3 w-3 mr-1" />
+                    {spotsRemaining} {spotsRemaining === 1 ? "Spot" : "Spots"} Left
+                  </Badge>
+                ) : null}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Content */}

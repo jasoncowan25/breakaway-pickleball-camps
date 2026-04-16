@@ -73,11 +73,7 @@ const nextConfig = {
         destination: '/pickleball-coaches',
         permanent: true,
       },
-      {
-        source: '/experience',
-        destination: '/pickleball-camp-experience',
-        permanent: true,
-      },
+      
     ]
   },
 }

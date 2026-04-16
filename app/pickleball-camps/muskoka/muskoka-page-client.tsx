@@ -212,7 +212,7 @@ export function MuskokaPageClient() {
   
   // Manual overrides for sold out camps
   const SOLD_OUT_OVERRIDES: Record<string, boolean> = {
-    "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s": true, // July 13-15 Afternoon
+    // Add URLs here to manually mark camps as sold out
   }
 
   const getAvailability = (checkoutUrl: string) => {
