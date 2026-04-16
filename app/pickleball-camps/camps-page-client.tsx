@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, Suspense, useMemo } from "react"
-import useSWR from "swr"
+import { useState, Suspense } from "react"
 import { Navigation } from "@/components/Navigation"
 import { Footer } from "@/components/Footer"
 import { CampCard } from "@/components/CampCard"
+import { MuskokaHubCard } from "@/components/MuskokaHubCard"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
@@ -12,23 +12,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Filter } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
-type AvailabilityData = {
-  availability: Record<string, { spotsRemaining: number; maxSpots: number }>
-  lastUpdated: string
-}
-
-// Map camp IDs to their Stripe checkout URLs for availability lookup
-const CAMP_CHECKOUT_URLS: Record<string, string> = {
-  "muskoka-intermediate-jul-10": "https://book.stripe.com/28E00j2Vmbz18qy5q2f3a0p",
-  "muskoka-fundamentals-jul-10": "https://book.stripe.com/dRm8wPeE46eHeOW05If3a0q",
-  "muskoka-intermediate-jul-13": "https://book.stripe.com/dRmfZhanOcD5bCK8Cef3a0r",
-  "muskoka-fundamentals-jul-13": "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s",
-  "muskoka-fundamentals-jul-17": "https://book.stripe.com/3cI5kDanOfPhgX4g4Gf3a0t",
-  "muskoka-intermediate-jul-17": "https://book.stripe.com/6oU3cvgMc32v6iqf0Cf3a0u",
-}
 
 function CampsPageContent() {
   const searchParams = useSearchParams()
@@ -56,21 +39,7 @@ function CampsPageContent() {
   const [selectedFormats, setSelectedFormats] = useState<string[]>([])
   const [dateFilter, setDateFilter] = useState<"upcoming" | "completed">("upcoming")
 
-  // Fetch availability data
-  const { data: availabilityData, isLoading: isLoadingAvailability } = useSWR<AvailabilityData>(
-    "/api/camp-availability",
-    fetcher,
-    { refreshInterval: 30000 }
-  )
-
-  // Helper to get availability for a camp
-  const getAvailability = (campId: string) => {
-    const checkoutUrl = CAMP_CHECKOUT_URLS[campId]
-    if (!checkoutUrl) return undefined
-    return availabilityData?.availability?.[checkoutUrl]
-  }
-
-  const upcomingCamps = useMemo(() => [
+  const upcomingCamps = [
     {
       id: "toronto-beginner-may",
       title: "Toronto Fundamentals Intensive\n(2.5–2.75)",
@@ -91,119 +60,10 @@ function CampsPageContent() {
       imageEnhanced: true,
       soldOut: false,
     },
-    // Muskoka Summer Camps
-    {
-      id: "muskoka-intermediate-jul-10",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 10-12, 2026",
-      sortDate: new Date("2026-07-10"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      hasAvailability: true,
-    },
-    {
-      id: "muskoka-fundamentals-jul-10",
-      title: "Muskoka Fundamentals Camp (Under 3.0)",
-      date: "July 10-12, 2026",
-      sortDate: new Date("2026-07-10"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "Under 3.0",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      hasAvailability: true,
-    },
-    {
-      id: "muskoka-intermediate-jul-13",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 13-15, 2026",
-      sortDate: new Date("2026-07-13"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      hasAvailability: true,
-    },
-    {
-      id: "muskoka-fundamentals-jul-13",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 13-15, 2026",
-      sortDate: new Date("2026-07-13"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      hasAvailability: true,
-    },
-    {
-      id: "muskoka-fundamentals-jul-17",
-      title: "Muskoka Fundamentals Camp (Under 3.0)",
-      date: "July 17-19, 2026",
-      sortDate: new Date("2026-07-17"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "Under 3.0",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      hasAvailability: true,
-    },
-    {
-      id: "muskoka-intermediate-jul-17",
-      title: "Muskoka Intermediate Camp (3.0+)",
-      date: "July 17-19, 2026",
-      sortDate: new Date("2026-07-17"),
-      location: "Private Facility, Muskoka",
-      locationFilter: "Muskoka",
-      format: "Camp",
-      skillLevel: "3.0+",
-      price: "$800 CAD",
-      image: "/muskoka-photos/muskoka-court-indoor.jpg",
-      badges: [
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/muskoka#camps",
-      hasAvailability: true,
-    },
   ].sort((a, b) => {
     // Sort by date
     return a.sortDate.getTime() - b.sortDate.getTime()
-  }), [])
+  })
 
   const completedCamps = [
     {
@@ -471,18 +331,16 @@ function CampsPageContent() {
                 dateFilter === "completed" ? "md:grid-cols-1 lg:grid-cols-2" : "md:grid-cols-2"
               } gap-6 lg:gap-8`}
             >
-              {filteredCamps.map((camp) => {
-                const availability = 'hasAvailability' in camp && camp.hasAvailability ? getAvailability(camp.id) : undefined
-                return (
-                  <CampCard 
-                    key={camp.id} 
-                    {...camp} 
-                    spotsRemaining={availability?.spotsRemaining}
-                    isLoadingAvailability={'hasAvailability' in camp && camp.hasAvailability && isLoadingAvailability}
-                    soldOut={availability?.spotsRemaining === 0}
-                  />
-                )
-              })}
+              {filteredCamps.map((camp) => (
+                <CampCard key={camp.id} {...camp} />
+              ))}
+              {/* Show Muskoka Hub Card for upcoming camps when no location filter or Muskoka is selected */}
+              {dateFilter === "upcoming" && 
+                (selectedLocations.length === 0 || selectedLocations.includes("Muskoka")) && 
+                selectedSkillLevels.length === 0 && 
+                selectedFormats.length === 0 && (
+                <MuskokaHubCard />
+              )}
             </div>
             {filteredCamps.length === 0 && (
               <div className="text-center py-12">
