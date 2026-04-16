@@ -57,26 +57,17 @@ function CampsPageContent() {
   const [dateFilter, setDateFilter] = useState<"upcoming" | "completed">("upcoming")
 
   // Fetch availability data
-  const { data: availabilityData } = useSWR<AvailabilityData>(
+  const { data: availabilityData, isLoading: isLoadingAvailability } = useSWR<AvailabilityData>(
     "/api/camp-availability",
     fetcher,
     { refreshInterval: 30000 }
   )
 
-  // Helper to get spots badge for a camp
-  const getSpotsBadge = (campId: string) => {
+  // Helper to get availability for a camp
+  const getAvailability = (campId: string) => {
     const checkoutUrl = CAMP_CHECKOUT_URLS[campId]
-    if (!checkoutUrl || !availabilityData?.availability) {
-      return { text: "4 Players Max", variant: "accent" as const }
-    }
-    const availability = availabilityData.availability[checkoutUrl]
-    if (availability) {
-      if (availability.spotsRemaining === 0) {
-        return { text: "Sold Out", variant: "secondary" as const }
-      }
-      return { text: `${availability.spotsRemaining} Spots Left`, variant: "accent" as const }
-    }
-    return { text: "4 Players Max", variant: "accent" as const }
+    if (!checkoutUrl) return undefined
+    return availabilityData?.availability?.[checkoutUrl]
   }
 
   const upcomingCamps = useMemo(() => [
@@ -113,12 +104,11 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/muskoka-photos/muskoka-court-indoor.jpg",
       badges: [
-        getSpotsBadge("muskoka-intermediate-jul-10"),
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/muskoka#camps",
-      soldOut: getSpotsBadge("muskoka-intermediate-jul-10").text === "Sold Out",
+      hasAvailability: true,
     },
     {
       id: "muskoka-fundamentals-jul-10",
@@ -132,12 +122,11 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/muskoka-photos/muskoka-court-indoor.jpg",
       badges: [
-        getSpotsBadge("muskoka-fundamentals-jul-10"),
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/muskoka#camps",
-      soldOut: getSpotsBadge("muskoka-fundamentals-jul-10").text === "Sold Out",
+      hasAvailability: true,
     },
     {
       id: "muskoka-intermediate-jul-13",
@@ -151,12 +140,11 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/muskoka-photos/muskoka-court-indoor.jpg",
       badges: [
-        getSpotsBadge("muskoka-intermediate-jul-13"),
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/muskoka#camps",
-      soldOut: getSpotsBadge("muskoka-intermediate-jul-13").text === "Sold Out",
+      hasAvailability: true,
     },
     {
       id: "muskoka-fundamentals-jul-13",
@@ -170,12 +158,11 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/muskoka-photos/muskoka-court-indoor.jpg",
       badges: [
-        getSpotsBadge("muskoka-fundamentals-jul-13"),
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/muskoka#camps",
-      soldOut: getSpotsBadge("muskoka-fundamentals-jul-13").text === "Sold Out",
+      hasAvailability: true,
     },
     {
       id: "muskoka-fundamentals-jul-17",
@@ -189,12 +176,11 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/muskoka-photos/muskoka-court-indoor.jpg",
       badges: [
-        getSpotsBadge("muskoka-fundamentals-jul-17"),
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/muskoka#camps",
-      soldOut: getSpotsBadge("muskoka-fundamentals-jul-17").text === "Sold Out",
+      hasAvailability: true,
     },
     {
       id: "muskoka-intermediate-jul-17",
@@ -208,20 +194,16 @@ function CampsPageContent() {
       price: "$800 CAD",
       image: "/muskoka-photos/muskoka-court-indoor.jpg",
       badges: [
-        getSpotsBadge("muskoka-intermediate-jul-17"),
         { text: "Joey Manchurek Signature", variant: "secondary" as const },
       ],
       coach: "Joey Manchurek",
       link: "/pickleball-camps/muskoka#camps",
-      soldOut: getSpotsBadge("muskoka-intermediate-jul-17").text === "Sold Out",
+      hasAvailability: true,
     },
   ].sort((a, b) => {
-    // Sort by soldOut status first (available camps first), then by date
-    if (a.soldOut !== b.soldOut) {
-      return a.soldOut ? 1 : -1
-    }
+    // Sort by date
     return a.sortDate.getTime() - b.sortDate.getTime()
-  }), [availabilityData])
+  }), [])
 
   const completedCamps = [
     {
@@ -489,9 +471,18 @@ function CampsPageContent() {
                 dateFilter === "completed" ? "md:grid-cols-1 lg:grid-cols-2" : "md:grid-cols-2"
               } gap-6 lg:gap-8`}
             >
-              {filteredCamps.map((camp) => (
-                <CampCard key={camp.id} {...camp} />
-              ))}
+              {filteredCamps.map((camp) => {
+                const availability = 'hasAvailability' in camp && camp.hasAvailability ? getAvailability(camp.id) : undefined
+                return (
+                  <CampCard 
+                    key={camp.id} 
+                    {...camp} 
+                    spotsRemaining={availability?.spotsRemaining}
+                    isLoadingAvailability={'hasAvailability' in camp && camp.hasAvailability && isLoadingAvailability}
+                    soldOut={availability?.spotsRemaining === 0}
+                  />
+                )
+              })}
             </div>
             {filteredCamps.length === 0 && (
               <div className="text-center py-12">
