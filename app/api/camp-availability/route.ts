@@ -49,13 +49,18 @@ export async function GET() {
     // Cache payment link URLs to avoid repeated API calls
     const paymentLinkCache: Record<string, string | null> = {}
 
+    // Debug: track sessions with metadata
+    const debugInfo: Array<{ sessionId: string; metadata: Record<string, string> | null; paymentIntentMetadata: Record<string, string> | null }> = []
+
     // Count bookings per payment link URL
     for (const session of sessions.data) {
       if (!session.payment_link) continue
 
       // Check if the payment was refunded using expanded payment intent
+      let paymentIntentMetadata: Record<string, string> | null = null
       if (session.payment_intent && typeof session.payment_intent !== "string") {
         const paymentIntent = session.payment_intent
+        paymentIntentMetadata = paymentIntent.metadata as Record<string, string> | null
         
         // Check latest_charge for refund status
         const latestCharge = paymentIntent.latest_charge
@@ -71,9 +76,18 @@ export async function GET() {
         }
       }
 
+      // Log metadata for debugging
+      if (session.metadata && Object.keys(session.metadata).length > 0) {
+        debugInfo.push({
+          sessionId: session.id,
+          metadata: session.metadata as Record<string, string>,
+          paymentIntentMetadata,
+        })
+      }
+
       // Check for count_as_camp metadata to reassign this payment to a different camp
-      // This allows moving a customer from one camp to another without refunds
-      const countAsCamp = session.metadata?.count_as_camp
+      // Check both session metadata and payment intent metadata
+      const countAsCamp = session.metadata?.count_as_camp || paymentIntentMetadata?.count_as_camp
       if (countAsCamp && PRODUCT_TO_LINK[countAsCamp]) {
         const reassignedLinkUrl = PRODUCT_TO_LINK[countAsCamp]
         if (availability[reassignedLinkUrl]) {
@@ -111,6 +125,10 @@ export async function GET() {
     return NextResponse.json({ 
       availability,
       lastUpdated: new Date().toISOString(),
+      debug: {
+        totalSessions: sessions.data.length,
+        sessionsWithMetadata: debugInfo,
+      },
     })
   } catch (error) {
     console.error("Error fetching camp availability:", error)
