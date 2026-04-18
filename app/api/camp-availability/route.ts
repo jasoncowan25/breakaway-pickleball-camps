@@ -13,6 +13,17 @@ const CAMP_CONFIG: Record<string, number> = {
   "https://book.stripe.com/6oU3cvgMc32v6iqf0Cf3a0u": 4, // July 17-19 - Intermediate PM
 }
 
+// Map Stripe product IDs to payment link URLs
+// Used for count_as_camp metadata to reassign payments
+const PRODUCT_TO_LINK: Record<string, string> = {
+  "prod_SLQXDhB3dSc2NJ": "https://book.stripe.com/28E00j2Vmbz18qy5q2f3a0p", // July 10-12 - Fundamentals AM
+  "prod_SLQZvJx9SBPpvC": "https://book.stripe.com/dRm8wPeE46eHeOW05If3a0q", // July 10-12 - Intermediate PM
+  "prod_SLQbLGkPNvMIwG": "https://book.stripe.com/dRmfZhanOcD5bCK8Cef3a0r", // July 13-15 - Intermediate AM
+  "prod_SLQcFqBe0mU9j6": "https://book.stripe.com/9B600j7bC5aD22a3hUf3a0s", // July 13-15 - Intermediate PM
+  "prod_SLQe2VkVSjn0GS": "https://book.stripe.com/3cI5kDanOfPhgX4g4Gf3a0t", // July 17-19 - Fundamentals AM
+  "prod_SLQfHEJfr1qUlz": "https://book.stripe.com/6oU3cvgMc32v6iqf0Cf3a0u", // July 17-19 - Intermediate PM
+}
+
 
 
 export async function GET() {
@@ -57,6 +68,20 @@ export async function GET() {
         if (paymentIntent.status === "canceled" || paymentIntent.amount_received === 0) {
           continue
         }
+      }
+
+      // Check for count_as_camp metadata to reassign this payment to a different camp
+      // This allows moving a customer from one camp to another without refunds
+      const countAsCamp = session.metadata?.count_as_camp
+      if (countAsCamp && PRODUCT_TO_LINK[countAsCamp]) {
+        const reassignedLinkUrl = PRODUCT_TO_LINK[countAsCamp]
+        if (availability[reassignedLinkUrl]) {
+          availability[reassignedLinkUrl].spotsRemaining = Math.max(
+            0,
+            availability[reassignedLinkUrl].spotsRemaining - 1
+          )
+        }
+        continue // Skip normal counting for this payment
       }
 
       // Get payment link URL (use cache to avoid repeated API calls)
