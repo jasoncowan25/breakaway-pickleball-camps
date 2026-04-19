@@ -334,11 +334,10 @@ function CampsPageContent() {
               {filteredCamps.map((camp) => (
                 <CampCard key={camp.id} {...camp} />
               ))}
-              {/* Show Muskoka Hub Card for upcoming camps when no location filter or Muskoka is selected */}
+              {/* Show Muskoka Hub Card for upcoming camps - Muskoka has camps for all skill levels */}
               {dateFilter === "upcoming" && 
                 (selectedLocations.length === 0 || selectedLocations.includes("Muskoka")) && 
-                selectedSkillLevels.length === 0 && 
-                selectedFormats.length === 0 && (
+                (selectedFormats.length === 0 || selectedFormats.includes("Camp")) && (
                 <MuskokaHubCard />
               )}
             </div>
