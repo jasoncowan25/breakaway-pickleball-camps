@@ -37,7 +37,7 @@ export function FooterNotifySignup({ showViewCampsButton = false }: FooterNotify
     setIsSubmitting(true)
 
     try {
-      await fetch("https://hooks.zapier.com/hooks/catch/22788039/ugfdooi/", {
+      await fetch("/api/waitlist", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
