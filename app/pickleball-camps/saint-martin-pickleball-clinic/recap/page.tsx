@@ -3,12 +3,14 @@ import Link from "next/link"
 import { ArrowLeft, Calendar, MapPin, Users, Trophy, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { FooterNotifySignup } from "@/components/FooterNotifySignup"
 
 export const metadata: Metadata = {
-  title: "Saint Martin Clinic Recap | Breakaway Pickleball",
-  description: "Recap of our Saint Martin pop-up pickleball clinic at the American Tennis Club. 16 players reviewed fundamentals, core shots, and enjoyed beautiful Caribbean weather.",
+  title: "Saint Martin Pop-Up Clinic Recap | Breakaway Pickleball",
+  description: "Recap of the Saint Martin Pop-Up Pickleball Clinic — March 2026.",
+  alternates: { canonical: "/pickleball-camps/saint-martin-pickleball-clinic/recap" },
+  openGraph: { url: "/pickleball-camps/saint-martin-pickleball-clinic/recap" },
 }
 
 export default function SaintMartinClinicRecapPage() {

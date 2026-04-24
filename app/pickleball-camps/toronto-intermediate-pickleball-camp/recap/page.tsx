@@ -4,9 +4,13 @@ import { ArrowLeft, Calendar, MapPin, Users, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
-export const metadata = {
-  title: "Toronto 3.0-3.5 Camp Recap | April 2026 | Breakaway Pickleball",
-  description: "Recap of the Toronto Intermediate Intensive pickleball camp held April 11-12, 2026 at The Jar PickleBall Club.",
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Toronto 3.0-3.5 Camp Recap | Breakaway Pickleball",
+  description: "Recap of the Toronto Intermediate Intensive — April 11-12, 2026.",
+  alternates: { canonical: "/pickleball-camps/toronto-intermediate-pickleball-camp/recap" },
+  openGraph: { url: "/pickleball-camps/toronto-intermediate-pickleball-camp/recap" },
 }
 
 export default function TorontoIntermediateAprilRecapPage() {
