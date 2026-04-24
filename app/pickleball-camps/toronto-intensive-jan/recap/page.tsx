@@ -4,6 +4,14 @@ import { ArrowLeft, Calendar, MapPin, Users, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { FooterNotifySignup } from "@/components/FooterNotifySignup"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Toronto Intermediate Intensive Recap | Breakaway Pickleball",
+  description: "Recap of the Toronto Intermediate Intensive — January 10-11, 2026.",
+  alternates: { canonical: "/pickleball-camps/toronto-intensive-jan/recap" },
+  openGraph: { url: "/pickleball-camps/toronto-intensive-jan/recap" },
+}
 
 export default function TorontoIntensiveRecapPage() {
   return (
