@@ -10,15 +10,20 @@ export async function POST(req: NextRequest) {
     }
 
     const webhook = "https://hooks.zapier.com/hooks/catch/22788039/ugfdooi/"
-    const params = new URLSearchParams({
-      email,
-      postalCode,
-      skillLevels,
-      timestamp: timestamp || new Date().toISOString(),
-      source: "breakawaypickleball.ca",
+    
+    const z = await fetch(webhook, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        postalCode,
+        skillLevels,
+        timestamp: timestamp || new Date().toISOString(),
+        source: "breakawaypickleball.ca",
+      }),
     })
-
-    const z = await fetch(`${webhook}?${params.toString()}`, { method: "POST" })
     if (!z.ok) {
       return new Response(JSON.stringify({ ok: false, error: "Upstream error" }), { status: 502 })
     }
