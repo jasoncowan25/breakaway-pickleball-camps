@@ -321,7 +321,7 @@ export function MuskokaPageClient() {
                 </Button>
                 <Button onClick={() => setMapModalOpen(true)} variant="outline" size="lg">
                   <MapPin className="h-4 w-4 mr-2" />
-                  See the Location
+                  See The Location
                 </Button>
               </div>
             </div>
