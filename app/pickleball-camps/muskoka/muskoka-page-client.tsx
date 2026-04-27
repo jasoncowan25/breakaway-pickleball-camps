@@ -104,6 +104,34 @@ const muskokaCamps = [
     checkoutUrl: "https://book.stripe.com/6oU3cvgMc32v6iqf0Cf3a0u",
     week: 3,
   },
+  {
+    id: "muskoka-intermediate-aug-4-am",
+    title: "Intermediate Camp",
+    level: "Intermediate (3.0+)",
+    levelVariant: "secondary" as const,
+    dates: "August 4-6, 2026",
+    time: "9:00 AM - 12:00 PM",
+    duration: "3 Days",
+    price: "$800 CAD",
+    maxPlayers: 4,
+    focus: ["Drops & resets", "Drives & speed-ups", "Dinking patterns", "Positioning & transitions", "Smart attacking"],
+    checkoutUrl: "",
+    week: 4,
+  },
+  {
+    id: "muskoka-intermediate-aug-4-pm",
+    title: "Intermediate Camp",
+    level: "Intermediate (3.0+)",
+    levelVariant: "secondary" as const,
+    dates: "August 4-6, 2026",
+    time: "1:00 PM - 4:00 PM",
+    duration: "3 Days",
+    price: "$800 CAD",
+    maxPlayers: 4,
+    focus: ["Drops & resets", "Drives & speed-ups", "Dinking patterns", "Positioning & transitions", "Smart attacking"],
+    checkoutUrl: "",
+    week: 4,
+  },
 ]
 
 function CampCard({ 
@@ -379,6 +407,22 @@ export function MuskokaPageClient() {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filterCampsByLevel(muskokaCamps)
                   .filter((c) => c.week === 3)
+                  .map((camp) => (
+                    <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} isLoading={isLoadingAvailability} />
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* Week 4 */}
+          {filterCampsByLevel(muskokaCamps).filter((c) => c.week === 4).length > 0 && (
+            <div className="mb-8">
+              <h3 className="text-sm font-semibold text-muted-foreground mb-4 uppercase tracking-wide">
+                August 4-6
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filterCampsByLevel(muskokaCamps)
+                  .filter((c) => c.week === 4)
                   .map((camp) => (
                     <CampCard key={camp.id} camp={camp} availability={getAvailability(camp.checkoutUrl)} isLoading={isLoadingAvailability} />
                   ))}
