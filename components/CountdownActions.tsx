@@ -29,7 +29,12 @@ export default function CountdownActions() {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ 
+          email,
+          postalCode: "",
+          skillLevels: "",
+          timestamp: new Date().toISOString(),
+        }),
       })
       const data = await res.json()
       if (!res.ok || !data?.ok) throw new Error()
