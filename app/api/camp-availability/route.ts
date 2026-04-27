@@ -2,6 +2,11 @@ import { NextResponse } from "next/server"
 
 // Camp availability API - uses fetch to call Stripe REST API directly (no SDK needed)
 
+// Force these camps to show as sold out (override Stripe data)
+const SOLD_OUT_OVERRIDE: string[] = [
+  "https://book.stripe.com/7sY6oHfI89qTgX405If3a0w", // Aug 4-6, 1-4 PM
+]
+
 // Map payment link URLs to max spots
 const CAMP_CONFIG: Record<string, number> = {
   "https://book.stripe.com/28E00j2Vmbz18qy5q2f3a0p": 4,
@@ -124,6 +129,13 @@ export async function GET() {
       const linkUrl = paymentLinkCache[linkId]
       if (linkUrl && availability[linkUrl]) {
         availability[linkUrl].spotsRemaining = Math.max(0, availability[linkUrl].spotsRemaining - 1)
+      }
+    }
+
+    // Apply sold out overrides
+    for (const url of SOLD_OUT_OVERRIDE) {
+      if (availability[url]) {
+        availability[url].spotsRemaining = 0
       }
     }
 
