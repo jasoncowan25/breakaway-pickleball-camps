@@ -50,7 +50,7 @@ export function MuskokaHubCard({ className }: MuskokaHubCardProps) {
 
           {/* Date strip */}
           <p className="text-xs text-muted-foreground">
-            July 10–12 · July 13–15 · July 17–19
+            July 10–12 · July 13–15 · July 17–19 · August 4–6
           </p>
         </div>
 
