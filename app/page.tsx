@@ -21,7 +21,7 @@ export default function HomePage() {
     price: "$900 CAD / player",
     image: "/toronto-coaching-instruction.png",
     badges: [
-      { text: "New", variant: "accent" as const },
+      { text: "Just Announced", variant: "accent" as const },
       { text: "Joey Signature", variant: "secondary" as const },
     ],
     coach: "Joey Manchurek",
