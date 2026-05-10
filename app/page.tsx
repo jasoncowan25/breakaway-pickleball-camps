@@ -14,11 +14,11 @@ import Link from "next/link"
 export default function HomePage() {
   const torontoCamp = {
     id: "toronto-beginner-may",
-    title: "Toronto Fundamentals Intensive\n(2.75–3.0)",
-    date: "May 30-31, 2026",
-    sortDate: new Date("2026-05-30"),
+    title: "Toronto Intermediate Intensive\n(3.5)",
+    date: "June 20-21, 2026",
+    sortDate: new Date("2026-06-20"),
     location: "The Jar PickleBall Club",
-    price: "$675 CAD / player",
+    price: "$900 CAD / player",
     image: "/toronto-coaching-instruction.png",
     badges: [
       { text: "New", variant: "accent" as const },
