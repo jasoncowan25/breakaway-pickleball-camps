@@ -42,7 +42,7 @@ export default function TorontoBeginnerCampClient() {
     price: "$700 CAD / player",
     spotsLeft: 16,
     venue: "The Jar PickleBall Club",
-    checkoutUrl: "https://book.stripe.com/00w00jfI88mPcGOcSuf3a0x",
+    checkoutUrl: "https://book.stripe.com/fZu14ndA0dH9cGObOqf3a0D",
     coachBio:
       "Former pro hockey player (OHL Oshawa Generals Captain; later ECHL). Grew up playing tennis & table tennis; transitioned quickly to competitive pickleball. Actively competes in tournaments; coaching focus on leadership, skill development, and helping players reach potential.",
     image: "/toronto-beginner-intensive-may-2026.png",
