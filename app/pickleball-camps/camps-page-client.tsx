@@ -61,26 +61,6 @@ function CampsPageContent() {
 
   const upcomingCamps = [
     {
-      id: "toronto-beginner-may",
-      title: "Toronto Intermediate Intensive\n(3.0–3.5)",
-      date: "June 20-21, 2026",
-      sortDate: new Date("2026-06-20"),
-      location: "The Jar PickleBall Club",
-      locationFilter: "Toronto & GTA",
-      format: "Camp",
-      skillLevel: "3.5",
-      price: "$700 CAD / player",
-      image: "/toronto-beginner-intensive-may-2026.png",
-      badges: [
-        { text: "Just Announced", variant: "accent" as const },
-        { text: "Joey Manchurek Signature", variant: "secondary" as const },
-      ],
-      coach: "Joey Manchurek",
-      link: "/pickleball-camps/toronto-intermediate-intensive-june-2026",
-      imageEnhanced: true,
-      soldOut: false,
-    },
-    {
       id: "punta-cana-2026",
       title: "Punta Cana Destination Retreat",
       date: "Nov 24 – Dec 1, 2026",

@@ -12,24 +12,6 @@ import { ArrowRight, Quote } from "lucide-react"
 import Link from "next/link"
 
 export default function HomePage() {
-  const torontoCamp = {
-    id: "toronto-beginner-may",
-    title: "Toronto Intermediate Intensive\n(3.0–3.5)",
-    date: "June 20-21, 2026",
-    sortDate: new Date("2026-06-20"),
-    location: "The Jar PickleBall Club",
-    price: "$700 CAD / player",
-    image: "/toronto-coaching-instruction.png",
-    badges: [
-      { text: "Just Announced", variant: "accent" as const },
-      { text: "Joey Signature", variant: "secondary" as const },
-    ],
-    coach: "Joey Manchurek",
-    link: "/pickleball-camps/toronto-intermediate-intensive-june-2026",
-    imageEnhanced: true,
-    soldOut: false,
-  }
-
   const puntaCanaCamp = {
     id: "punta-cana-2026",
     title: "Punta Cana Destination Retreat",
@@ -93,7 +75,6 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <CampCard {...torontoCamp} />
             <MuskokaHubCard className="md:col-span-2 lg:col-span-2" />
             <CampCard {...puntaCanaCamp} />
           </div>
